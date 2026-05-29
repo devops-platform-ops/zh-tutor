@@ -1,26 +1,28 @@
 # zh-tutor — 개발/운영 명령
 # 일부 타겟(db/cli/web)은 Phase 1 구현 후 동작합니다.
 
-.PHONY: help setup test db-up db-down cli web
+.PHONY: help setup lock test db-up db-down cli web
 
 help: ## 이 도움말
 	@awk -F ':.*## ' '/^[a-zA-Z_-]+:.*## / { printf "  %-12s %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-setup: ## venv 생성 + 의존성 설치 (uv)
-	uv venv .venv
-	uv pip install --python .venv -e ".[dev]"
+setup: ## 의존성 동기화 (uv.lock 기준)
+	uv sync
+
+lock: ## 의존성 잠금 갱신 (uv.lock)
+	uv lock
 
 test: ## 단위 테스트 (core 로직)
-	.venv/bin/python -m pytest -q
+	uv run pytest -q
 
-db-up: ## Dolt sql-server 기동 (Phase 1)
-	.venv/bin/python -m zhtutor.db --start
+db-up: ## Dolt sql-server 기동
+	uv run python -m zhtutor.db --start
 
-db-down: ## Dolt sql-server 중지 (Phase 1)
-	.venv/bin/python -m zhtutor.db --stop
+db-down: ## Dolt sql-server 중지
+	uv run python -m zhtutor.db --stop
 
 cli: ## 터미널 튜터 (zh)
-	.venv/bin/python -m zhtutor.cli
+	uv run zh
 
 web: ## 웹 UI (zhw, http://127.0.0.1:7860)
-	.venv/bin/python -m zhtutor.web
+	uv run zhw

@@ -12,9 +12,10 @@ dependencies = [
     "pypinyin",         # 발음(핀인·성조) 분석
     "gradio",           # 웹 UI
     "pymysql",          # Dolt sql-server 연결
+    "onnxruntime<1.24", # faster-whisper VAD 의존 — Intel mac x86_64 휠 보장(1.24+ 미제공)
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["pytest"]
 
 [project.scripts]
