@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# 환경/비밀
+.env
+*.env
+
+# Dolt 데이터 (로컬 DB는 커밋하지 않음)
+dolt/
+data/
+
+# 레거시 JSON (Phase 1에서 Dolt로 마이그레이션)
+vocab.json
+stats.json
+*.migrated
+*.bak
+
+# 생성물
+*.wav
+*.aiff
+*.log
