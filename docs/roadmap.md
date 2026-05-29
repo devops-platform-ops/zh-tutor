@@ -5,16 +5,17 @@
 ## Phase 0 — repo 승격 + 문서화 ◀ 진행 중
 - [x] 로컬 git repo + 패키지 레이아웃(`src/zhtutor`, `docs`, `tests`)
 - [x] 문서: architecture / roadmap / decisions(ADR) / README / CLAUDE.md
-- [ ] 스캐폴딩: pyproject / Makefile / .gitignore
-- [ ] 기존 도구 이관: `~/.claude/zh-tutor/{zh_tutor.py, app.py}` → `cli.py` / `web.py`, repo 내부 venv, `zh`/`zhw` 경로 갱신
+- [x] 스캐폴딩: pyproject / Makefile / .gitignore
+- [x] 기존 도구 이관: `cli.py` / `web.py`, repo 내부 venv, `zh`/`zhw` 콘솔 스크립트
 - [ ] gitlab.dop/solutions/zh-tutor 생성 + GitHub(devops-platform-ops/zh-tutor) push-mirror
 
-## Phase 1 — 멀티테넌트 Dolt 기반
-- Dolt sql-server + pymysql, 멀티테넌트 스키마(users/vocab/review_log)
-- `db.py`(서버 lifecycle·연결·커밋) + `repo.py`(user_id 키) + `core.py`(순수 로직 분리)
-- 기존 `vocab.json` → vocab 테이블(user_id=1 'local') 마이그레이션
-- 인증은 기본 유저 스텁. CLI·웹 기존 기능 동일 동작 검증
-- 데이터 커밋: `/commit` + 세션 종료 시 자동
+## Phase 1 — 멀티테넌트 Dolt 기반 ✅ 완료
+- [x] Dolt sql-server + pymysql, 멀티테넌트 스키마(users/vocab/review_log)
+- [x] `db.py`(서버 lifecycle·연결·커밋) + `repo.py`(user_id 키)
+- [x] 기존 `vocab.json` → vocab 테이블(user_id=1 'local') 마이그레이션
+- [x] 인증 기본 유저 스텁(`ZH_USER`). CLI·웹 동일 동작 검증
+- [x] 데이터 커밋: `/commit` + 세션 종료 시 자동
+- [ ] `core.py`(순수 로직 분리)는 후속 리팩터로 이연(현재 cli.py에 상주, 멀티테넌트엔 영향 없음)
 
 ## Phase 2 — 학습 통계 대시보드
 - `review_log` 쿼리 기반: 연속 학습일·정확도·오늘/주간·box 분포·복습 예보(due)

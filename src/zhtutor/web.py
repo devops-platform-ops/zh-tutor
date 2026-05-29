@@ -196,6 +196,7 @@ def review_grade(st, text, mic):
             z.schedule(e, correct, today)
             break
     z.save_vocab(v)
+    z.log_review(target, correct, today)
     st = {**st, "graded": True, "done": st["done"] + 1,
           "correct": st["correct"] + (1 if correct else 0)}
     mark = "✅ 정답" if correct else "❌ 오답"
@@ -296,6 +297,11 @@ def main():
         print("경고: DEEPSEEK_API_KEY 없음 — 키체인 등록 후 실행하세요.", file=sys.stderr)
     if VOICE is None:
         print("경고: 중국어 음성(Tingting) 미설치 — 발음 재생은 비활성.", file=sys.stderr)
+    try:
+        z.db.init(z.VOCAB_PATH, z.USER_ID)
+    except Exception as e:
+        print(f"DB 초기화 실패: {e}", file=sys.stderr)
+        sys.exit(1)
     build().launch(server_name="127.0.0.1", inbrowser=True, show_error=True)
 
 

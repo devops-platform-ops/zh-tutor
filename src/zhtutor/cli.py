@@ -19,10 +19,13 @@ import sys
 import urllib.error
 import urllib.request
 
+from . import db, repo
+
 API_URL = "https://api.deepseek.com/chat/completions"
 DEFAULT_RATE = 170   # say -r (입문자용 약간 느리게)
 SLOW_RATE = 110
 VOCAB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vocab.json")
+USER_ID = int(os.environ.get("ZH_USER", "1"))  # 인증 전: 기본 유저 스텁
 SRS_INTERVALS = {1: 1, 2: 2, 3: 4, 4: 8, 5: 16}  # box → 다음 복습까지 일수
 SRS_PASS = 60  # 음성 답 정답 기준 점수
 
@@ -154,29 +157,15 @@ def score_pronunciation(target, heard):
 
 # ---- 단어장 (vocab.json 누적) ----
 def load_vocab():
-    if not os.path.exists(VOCAB_PATH):
-        return []
-    try:
-        with open(VOCAB_PATH, encoding="utf-8") as f:
-            data = json.load(f)
-        if not isinstance(data, list):
-            raise ValueError("최상위가 리스트가 아님")
-        return data
-    except (json.JSONDecodeError, ValueError, OSError) as e:
-        try:  # 손상 데이터는 .bak 로 보존하고 새로 시작
-            os.replace(VOCAB_PATH, VOCAB_PATH + ".bak")
-            print(f"  (단어장 손상 → {VOCAB_PATH}.bak 로 백업하고 새로 시작: {e})",
-                  file=sys.stderr)
-        except OSError:
-            pass
-        return []
+    return repo.get_vocab(USER_ID)
 
 
 def save_vocab(vocab):
-    tmp = VOCAB_PATH + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(vocab, f, ensure_ascii=False, indent=2)
-    os.replace(tmp, VOCAB_PATH)
+    repo.save_vocab(USER_ID, vocab)
+
+
+def log_review(hanzi, correct, day):
+    repo.log_review(USER_ID, hanzi, correct, day)
 
 
 def add_entry(vocab, hanzi, pinyin, ko):
@@ -427,6 +416,7 @@ HELP = """\
   /add 你好   단어 직접 추가 (핀인 자동 + 뜻 조회)
   /vocab      단어장 보기
   /review     오늘 복습 (SRS / 전체: /review all)
+  /commit     데이터 저장 (Dolt 커밋)
   /voice      발음 ON/OFF 토글
   /slow       느린 발음 ON/OFF 토글
   /new        대화 새로 시작
@@ -451,6 +441,12 @@ def main():
         print("DEEPSEEK_API_KEY 가 없습니다. 키체인 등록 후 새 터미널에서 실행하세요:\n"
               "  security add-generic-password -a \"$USER\" -s DEEPSEEK_API_KEY -w <KEY>",
               file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        db.init(VOCAB_PATH, USER_ID)
+    except Exception as e:
+        print(f"DB 초기화 실패: {e}", file=sys.stderr)
         sys.exit(1)
 
     model = args.model or ("deepseek-v4-flash" if args.flash else "deepseek-v4-pro")
@@ -515,6 +511,7 @@ def main():
         try:
             user_in = input("\n你 > ").strip()
         except (EOFError, KeyboardInterrupt):
+            db.commit("zh CLI 세션")
             print("\n再见! 👋")
             break
 
@@ -524,10 +521,14 @@ def main():
         cmd = parts[0].lower()
 
         if cmd in ("/q", "/quit", "/exit"):
+            db.commit("zh CLI 세션")
             print("再见! 👋")
             break
         if cmd == "/help":
             print(HELP)
+            continue
+        if cmd == "/commit":
+            print("  (커밋됨)" if db.commit("zh 수동 커밋") else "  (변경 없음)")
             continue
         if cmd == "/say":
             if not last_cn_list:
@@ -659,6 +660,7 @@ def main():
                 if voice:
                     speak(target, voice, rate)
                 schedule(card, correct, today)
+                log_review(target, correct, today)
                 done += 1
                 correct_n += 1 if correct else 0
             save_vocab(vocab)
