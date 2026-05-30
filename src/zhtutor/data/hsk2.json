@@ -1,0 +1,742 @@
+{
+  "license": "MIT (data: drkameleon/complete-hsk-vocabulary)",
+  "source": "https://github.com/drkameleon/complete-hsk-vocabulary",
+  "level": "HSK 2.0 Level 2",
+  "entries": [
+    {
+      "hanzi": "吧",
+      "pinyin": "bā",
+      "en": "bar (loanword) (serving drinks, or providing Internet access etc); to puff (on a pipe etc)"
+    },
+    {
+      "hanzi": "白",
+      "pinyin": "Bái",
+      "en": "surname Bai"
+    },
+    {
+      "hanzi": "百",
+      "pinyin": "Bǎi",
+      "en": "surname Bai"
+    },
+    {
+      "hanzi": "帮助",
+      "pinyin": "bāng zhù",
+      "en": "assistance; aid; to help; to assist"
+    },
+    {
+      "hanzi": "报纸",
+      "pinyin": "bào zhǐ",
+      "en": "newspaper; newsprint"
+    },
+    {
+      "hanzi": "比",
+      "pinyin": "Bǐ",
+      "en": "Belgium; Belgian"
+    },
+    {
+      "hanzi": "便宜",
+      "pinyin": "biàn yí",
+      "en": "convenient"
+    },
+    {
+      "hanzi": "别",
+      "pinyin": "Bié",
+      "en": "surname Bie"
+    },
+    {
+      "hanzi": "唱歌",
+      "pinyin": "chàng gē",
+      "en": "to sing a song"
+    },
+    {
+      "hanzi": "出",
+      "pinyin": "chū",
+      "en": "to go out; to come out"
+    },
+    {
+      "hanzi": "穿",
+      "pinyin": "chuān",
+      "en": "to wear; to put on"
+    },
+    {
+      "hanzi": "船",
+      "pinyin": "chuán",
+      "en": "variant of 船"
+    },
+    {
+      "hanzi": "次",
+      "pinyin": "cì",
+      "en": "next in sequence; second"
+    },
+    {
+      "hanzi": "从",
+      "pinyin": "cóng",
+      "en": "variant of 从"
+    },
+    {
+      "hanzi": "错",
+      "pinyin": "Cuò",
+      "en": "surname Cuo"
+    },
+    {
+      "hanzi": "打篮球",
+      "pinyin": "dǎ lán qiú",
+      "en": "to play basketball"
+    },
+    {
+      "hanzi": "大家",
+      "pinyin": "dà jiā",
+      "en": "everyone; influential family"
+    },
+    {
+      "hanzi": "但是",
+      "pinyin": "dàn shì",
+      "en": "but; however"
+    },
+    {
+      "hanzi": "到",
+      "pinyin": "dào",
+      "en": "to reach; to arrive; to leave for; to go to"
+    },
+    {
+      "hanzi": "得",
+      "pinyin": "dé",
+      "en": "to obtain; to get"
+    },
+    {
+      "hanzi": "弟弟",
+      "pinyin": "dì di",
+      "en": "younger brother"
+    },
+    {
+      "hanzi": "第一",
+      "pinyin": "dì yī",
+      "en": "first; number one"
+    },
+    {
+      "hanzi": "懂",
+      "pinyin": "dǒng",
+      "en": "to understand; to comprehend"
+    },
+    {
+      "hanzi": "房间",
+      "pinyin": "fáng jiān",
+      "en": "room"
+    },
+    {
+      "hanzi": "非常",
+      "pinyin": "fēi cháng",
+      "en": "very; really; unusual; extraordinary"
+    },
+    {
+      "hanzi": "服务员",
+      "pinyin": "fú wù yuán",
+      "en": "waiter; waitress"
+    },
+    {
+      "hanzi": "高",
+      "pinyin": "Gāo",
+      "en": "surname Gao"
+    },
+    {
+      "hanzi": "告诉",
+      "pinyin": "gào sù",
+      "en": "to press charges; to file a complaint"
+    },
+    {
+      "hanzi": "哥哥",
+      "pinyin": "gē ge",
+      "en": "older brother"
+    },
+    {
+      "hanzi": "给",
+      "pinyin": "gěi",
+      "en": "to; for"
+    },
+    {
+      "hanzi": "公共汽车",
+      "pinyin": "gōng gòng qì chē",
+      "en": "bus"
+    },
+    {
+      "hanzi": "公斤",
+      "pinyin": "gōng jīn",
+      "en": "kilogram (kg)"
+    },
+    {
+      "hanzi": "公司",
+      "pinyin": "gōng sī",
+      "en": "company; firm; corporation"
+    },
+    {
+      "hanzi": "贵",
+      "pinyin": "guì",
+      "en": "expensive; noble"
+    },
+    {
+      "hanzi": "还",
+      "pinyin": "Huán",
+      "en": "surname Huan"
+    },
+    {
+      "hanzi": "孩子",
+      "pinyin": "hái zi",
+      "en": "child"
+    },
+    {
+      "hanzi": "好吃",
+      "pinyin": "hǎo chī",
+      "en": "tasty; delicious"
+    },
+    {
+      "hanzi": "号",
+      "pinyin": "háo",
+      "en": "roar; cry"
+    },
+    {
+      "hanzi": "黑",
+      "pinyin": "Hēi",
+      "en": "abbr. for Heilongjiang province 黑龙江"
+    },
+    {
+      "hanzi": "红",
+      "pinyin": "Hóng",
+      "en": "surname Hong"
+    },
+    {
+      "hanzi": "欢迎",
+      "pinyin": "huān yíng",
+      "en": "to welcome; welcome"
+    },
+    {
+      "hanzi": "回答",
+      "pinyin": "huí dá",
+      "en": "to reply; to answer; reply; answer"
+    },
+    {
+      "hanzi": "机场",
+      "pinyin": "jī chǎng",
+      "en": "airport; airfield; (slang) service provider for Shadowsocks or similar software for circumventing Internet censorship"
+    },
+    {
+      "hanzi": "鸡蛋",
+      "pinyin": "jī dàn",
+      "en": "(chicken) egg; hen's egg"
+    },
+    {
+      "hanzi": "件",
+      "pinyin": "jiàn",
+      "en": "item; component"
+    },
+    {
+      "hanzi": "教室",
+      "pinyin": "jiào shì",
+      "en": "classroom"
+    },
+    {
+      "hanzi": "介绍",
+      "pinyin": "jiè shào",
+      "en": "to introduce (sb to sb); to give a presentation"
+    },
+    {
+      "hanzi": "姐姐",
+      "pinyin": "jiě jie",
+      "en": "older sister"
+    },
+    {
+      "hanzi": "近",
+      "pinyin": "jìn",
+      "en": "near; close to"
+    },
+    {
+      "hanzi": "进",
+      "pinyin": "jìn",
+      "en": "to go forward; to advance"
+    },
+    {
+      "hanzi": "就",
+      "pinyin": "jiù",
+      "en": "(after a suppositional clause) in that case; then; (after a clause of action) as soon as; immediately after"
+    },
+    {
+      "hanzi": "觉得",
+      "pinyin": "jué de",
+      "en": "to think that ...; to feel that ...; to feel (uncomfortable etc)"
+    },
+    {
+      "hanzi": "咖啡",
+      "pinyin": "kā fēi",
+      "en": "coffee (loanword)"
+    },
+    {
+      "hanzi": "开始",
+      "pinyin": "kāi shǐ",
+      "en": "to begin; beginning"
+    },
+    {
+      "hanzi": "考试",
+      "pinyin": "kǎo shì",
+      "en": "to take an exam; exam"
+    },
+    {
+      "hanzi": "可能",
+      "pinyin": "kě néng",
+      "en": "might (happen); possible"
+    },
+    {
+      "hanzi": "可以",
+      "pinyin": "kě yǐ",
+      "en": "can; may"
+    },
+    {
+      "hanzi": "课",
+      "pinyin": "kè",
+      "en": "subject; course"
+    },
+    {
+      "hanzi": "快",
+      "pinyin": "kuài",
+      "en": "rapid; quick"
+    },
+    {
+      "hanzi": "快乐",
+      "pinyin": "kuài lè",
+      "en": "happy; joyful"
+    },
+    {
+      "hanzi": "累",
+      "pinyin": "lěi",
+      "en": "to accumulate; to involve or implicate (Taiwan pr. [lèi])"
+    },
+    {
+      "hanzi": "离",
+      "pinyin": "chī",
+      "en": "mythical beast (archaic)"
+    },
+    {
+      "hanzi": "两",
+      "pinyin": "liǎng",
+      "en": "two; both"
+    },
+    {
+      "hanzi": "路",
+      "pinyin": "Lù",
+      "en": "surname Lu"
+    },
+    {
+      "hanzi": "旅游",
+      "pinyin": "lǚ yóu",
+      "en": "trip; journey"
+    },
+    {
+      "hanzi": "卖",
+      "pinyin": "mài",
+      "en": "to sell; to betray"
+    },
+    {
+      "hanzi": "慢",
+      "pinyin": "màn",
+      "en": "slow"
+    },
+    {
+      "hanzi": "忙",
+      "pinyin": "máng",
+      "en": "busy; hurriedly"
+    },
+    {
+      "hanzi": "每",
+      "pinyin": "měi",
+      "en": "each; every"
+    },
+    {
+      "hanzi": "妹妹",
+      "pinyin": "mèi mei",
+      "en": "younger sister; young woman"
+    },
+    {
+      "hanzi": "门",
+      "pinyin": "Mén",
+      "en": "surname Men"
+    },
+    {
+      "hanzi": "男人",
+      "pinyin": "nán rén",
+      "en": "a man; a male"
+    },
+    {
+      "hanzi": "您",
+      "pinyin": "nín",
+      "en": "you (courteous, as opposed to informal 你)"
+    },
+    {
+      "hanzi": "牛奶",
+      "pinyin": "niú nǎi",
+      "en": "cow's milk"
+    },
+    {
+      "hanzi": "女人",
+      "pinyin": "nǚ rén",
+      "en": "woman"
+    },
+    {
+      "hanzi": "旁边",
+      "pinyin": "páng biān",
+      "en": "side; adjacent place"
+    },
+    {
+      "hanzi": "跑步",
+      "pinyin": "pǎo bù",
+      "en": "to run; to jog"
+    },
+    {
+      "hanzi": "票",
+      "pinyin": "piào",
+      "en": "ticket; ballot"
+    },
+    {
+      "hanzi": "妻子",
+      "pinyin": "qī zǐ",
+      "en": "wife and children"
+    },
+    {
+      "hanzi": "起床",
+      "pinyin": "qǐ chuáng",
+      "en": "to get out of bed; to get up"
+    },
+    {
+      "hanzi": "千",
+      "pinyin": "qiān",
+      "en": "thousand"
+    },
+    {
+      "hanzi": "晴",
+      "pinyin": "qíng",
+      "en": "clear; fine (weather)"
+    },
+    {
+      "hanzi": "去年",
+      "pinyin": "qù nián",
+      "en": "last year"
+    },
+    {
+      "hanzi": "让",
+      "pinyin": "ràng",
+      "en": "to yield; to permit"
+    },
+    {
+      "hanzi": "上班",
+      "pinyin": "shàng bān",
+      "en": "to go to work; to be on duty"
+    },
+    {
+      "hanzi": "身体",
+      "pinyin": "shēn tǐ",
+      "en": "the body; one's health"
+    },
+    {
+      "hanzi": "生病",
+      "pinyin": "shēng bìng",
+      "en": "to fall ill"
+    },
+    {
+      "hanzi": "生日",
+      "pinyin": "shēng rì",
+      "en": "birthday"
+    },
+    {
+      "hanzi": "时间",
+      "pinyin": "shí jiān",
+      "en": "time; period"
+    },
+    {
+      "hanzi": "事情",
+      "pinyin": "shì qing",
+      "en": "affair; matter; thing; business"
+    },
+    {
+      "hanzi": "手表",
+      "pinyin": "shǒu biǎo",
+      "en": "wristwatch"
+    },
+    {
+      "hanzi": "手机",
+      "pinyin": "shǒu jī",
+      "en": "cell phone; mobile phone"
+    },
+    {
+      "hanzi": "送",
+      "pinyin": "sòng",
+      "en": "to send; to deliver; to transmit; to give (as a present)"
+    },
+    {
+      "hanzi": "所以",
+      "pinyin": "suǒ yǐ",
+      "en": "therefore; as a result"
+    },
+    {
+      "hanzi": "它",
+      "pinyin": "tā",
+      "en": "it"
+    },
+    {
+      "hanzi": "踢",
+      "pinyin": "tī",
+      "en": "to kick; to play (e.g. soccer)"
+    },
+    {
+      "hanzi": "题",
+      "pinyin": "Tí",
+      "en": "surname Ti"
+    },
+    {
+      "hanzi": "跳舞",
+      "pinyin": "tiào wǔ",
+      "en": "to dance"
+    },
+    {
+      "hanzi": "外",
+      "pinyin": "wài",
+      "en": "outside; in addition"
+    },
+    {
+      "hanzi": "完",
+      "pinyin": "wán",
+      "en": "to finish; to be over"
+    },
+    {
+      "hanzi": "玩",
+      "pinyin": "wán",
+      "en": "to play; to have fun"
+    },
+    {
+      "hanzi": "晚上",
+      "pinyin": "wǎn shang",
+      "en": "evening; night"
+    },
+    {
+      "hanzi": "为",
+      "pinyin": "wéi",
+      "en": "as (in the capacity of); to take sth as"
+    },
+    {
+      "hanzi": "问",
+      "pinyin": "wèn",
+      "en": "to ask; to inquire"
+    },
+    {
+      "hanzi": "问题",
+      "pinyin": "wèn tí",
+      "en": "question; problem"
+    },
+    {
+      "hanzi": "希望",
+      "pinyin": "xī wàng",
+      "en": "to hope; a hope; a wish"
+    },
+    {
+      "hanzi": "洗",
+      "pinyin": "xǐ",
+      "en": "to wash; to bathe; to develop (photographs)"
+    },
+    {
+      "hanzi": "西瓜",
+      "pinyin": "xī guā",
+      "en": "watermelon"
+    },
+    {
+      "hanzi": "向",
+      "pinyin": "Xiàng",
+      "en": "surname Xiang"
+    },
+    {
+      "hanzi": "小时",
+      "pinyin": "xiǎo shí",
+      "en": "hour"
+    },
+    {
+      "hanzi": "笑",
+      "pinyin": "xiào",
+      "en": "old variant of 笑"
+    },
+    {
+      "hanzi": "新",
+      "pinyin": "Xīn",
+      "en": "abbr. for Xinjiang 疆 or Singapore 坡; surname Xin"
+    },
+    {
+      "hanzi": "姓",
+      "pinyin": "xìng",
+      "en": "family name; surname"
+    },
+    {
+      "hanzi": "休息",
+      "pinyin": "xiū xi",
+      "en": "rest; to rest"
+    },
+    {
+      "hanzi": "雪",
+      "pinyin": "Xuě",
+      "en": "surname Xue"
+    },
+    {
+      "hanzi": "颜色",
+      "pinyin": "yán sè",
+      "en": "color; countenance"
+    },
+    {
+      "hanzi": "眼睛",
+      "pinyin": "yǎn jing",
+      "en": "eye"
+    },
+    {
+      "hanzi": "羊肉",
+      "pinyin": "yáng ròu",
+      "en": "mutton; goat meat"
+    },
+    {
+      "hanzi": "药",
+      "pinyin": "yào",
+      "en": "leaf of the iris; variant of 药"
+    },
+    {
+      "hanzi": "要",
+      "pinyin": "yāo",
+      "en": "(bound form) to demand; to coerce"
+    },
+    {
+      "hanzi": "也",
+      "pinyin": "Yě",
+      "en": "surname Ye"
+    },
+    {
+      "hanzi": "一起",
+      "pinyin": "yī qǐ",
+      "en": "in the same place; together"
+    },
+    {
+      "hanzi": "已经",
+      "pinyin": "yǐ jīng",
+      "en": "already"
+    },
+    {
+      "hanzi": "意思",
+      "pinyin": "yì si",
+      "en": "idea; opinion"
+    },
+    {
+      "hanzi": "因为",
+      "pinyin": "yīn wèi",
+      "en": "because; owing to"
+    },
+    {
+      "hanzi": "阴",
+      "pinyin": "Yīn",
+      "en": "surname Yin"
+    },
+    {
+      "hanzi": "游泳",
+      "pinyin": "yóu yǒng",
+      "en": "swimming; to swim"
+    },
+    {
+      "hanzi": "右边",
+      "pinyin": "yòu bian",
+      "en": "right side; right, to the right"
+    },
+    {
+      "hanzi": "鱼",
+      "pinyin": "Yú",
+      "en": "surname Yu"
+    },
+    {
+      "hanzi": "元",
+      "pinyin": "Yuán",
+      "en": "surname Yuan; the Yuan or Mongol dynasty (1279-1368)"
+    },
+    {
+      "hanzi": "远",
+      "pinyin": "yuǎn",
+      "en": "far; distant"
+    },
+    {
+      "hanzi": "运动",
+      "pinyin": "yùn dòng",
+      "en": "to move; to exercise"
+    },
+    {
+      "hanzi": "再",
+      "pinyin": "zài",
+      "en": "again; once more; re-; second; another"
+    },
+    {
+      "hanzi": "早上",
+      "pinyin": "zǎo shang",
+      "en": "early morning"
+    },
+    {
+      "hanzi": "张",
+      "pinyin": "Zhāng",
+      "en": "surname Zhang"
+    },
+    {
+      "hanzi": "长",
+      "pinyin": "cháng",
+      "en": "length; long"
+    },
+    {
+      "hanzi": "丈夫",
+      "pinyin": "zhàng fu",
+      "en": "husband"
+    },
+    {
+      "hanzi": "找",
+      "pinyin": "zhǎo",
+      "en": "to try to find; to look for"
+    },
+    {
+      "hanzi": "着",
+      "pinyin": "zhāo",
+      "en": "(chess) move; trick"
+    },
+    {
+      "hanzi": "真",
+      "pinyin": "zhēn",
+      "en": "really; truly"
+    },
+    {
+      "hanzi": "正在",
+      "pinyin": "zhèng zài",
+      "en": "just at (that time); right in (that place)"
+    },
+    {
+      "hanzi": "知道",
+      "pinyin": "zhī dào",
+      "en": "to know; to become aware of; also pr. [zhī dao]"
+    },
+    {
+      "hanzi": "准备",
+      "pinyin": "zhǔn bèi",
+      "en": "preparation; to prepare"
+    },
+    {
+      "hanzi": "自行车",
+      "pinyin": "zì xíng chē",
+      "en": "bicycle; bike"
+    },
+    {
+      "hanzi": "走",
+      "pinyin": "zǒu",
+      "en": "to walk; to go"
+    },
+    {
+      "hanzi": "最",
+      "pinyin": "zuì",
+      "en": "variant of 最"
+    },
+    {
+      "hanzi": "左边",
+      "pinyin": "zuǒ bian",
+      "en": "left; the left side"
+    }
+  ]
+}

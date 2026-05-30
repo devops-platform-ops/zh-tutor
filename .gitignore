@@ -11,7 +11,7 @@ __pycache__/
 
 # Dolt 데이터 (로컬 DB는 커밋하지 않음)
 dolt/
-data/
+/data/
 
 # 레거시 JSON (Phase 1에서 Dolt로 마이그레이션)
 vocab.json

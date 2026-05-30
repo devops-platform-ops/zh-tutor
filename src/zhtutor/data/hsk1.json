@@ -1,0 +1,757 @@
+{
+  "license": "MIT (data: drkameleon/complete-hsk-vocabulary)",
+  "source": "https://github.com/drkameleon/complete-hsk-vocabulary",
+  "level": "HSK 2.0 Level 1",
+  "entries": [
+    {
+      "hanzi": "爱",
+      "pinyin": "ài",
+      "en": "to love; to be fond of; to like; affection"
+    },
+    {
+      "hanzi": "八",
+      "pinyin": "bā",
+      "en": "eight; 8"
+    },
+    {
+      "hanzi": "爸爸",
+      "pinyin": "bà ba",
+      "en": "(coll.) father; dad"
+    },
+    {
+      "hanzi": "杯子",
+      "pinyin": "bēi zi",
+      "en": "cup; glass"
+    },
+    {
+      "hanzi": "北京",
+      "pinyin": "Běi jīng",
+      "en": "Beijing, capital of the People's Republic of China"
+    },
+    {
+      "hanzi": "本",
+      "pinyin": "běn",
+      "en": "root; stem"
+    },
+    {
+      "hanzi": "不",
+      "pinyin": "bù",
+      "en": "no; not so; (bound form) not; un-"
+    },
+    {
+      "hanzi": "不客气",
+      "pinyin": "bù kè qi",
+      "en": "you're welcome; don't mention it"
+    },
+    {
+      "hanzi": "菜",
+      "pinyin": "cài",
+      "en": "dish (type of food); vegetable"
+    },
+    {
+      "hanzi": "茶",
+      "pinyin": "chá",
+      "en": "tea; tea plant"
+    },
+    {
+      "hanzi": "吃",
+      "pinyin": "chī",
+      "en": "to eat; to consume; to eat at (a cafeteria etc)"
+    },
+    {
+      "hanzi": "出租车",
+      "pinyin": "chū zū chē",
+      "en": "taxi; (Tw) rental car"
+    },
+    {
+      "hanzi": "打电话",
+      "pinyin": "dǎ diàn huà",
+      "en": "to make a telephone call"
+    },
+    {
+      "hanzi": "大",
+      "pinyin": "dà",
+      "en": "big; large; great; older (than another person)"
+    },
+    {
+      "hanzi": "的",
+      "pinyin": "de",
+      "en": "of; ~'s (possessive particle); (used after an attribute)"
+    },
+    {
+      "hanzi": "点",
+      "pinyin": "diǎn",
+      "en": "point; dot"
+    },
+    {
+      "hanzi": "电脑",
+      "pinyin": "diàn nǎo",
+      "en": "computer"
+    },
+    {
+      "hanzi": "电视",
+      "pinyin": "diàn shì",
+      "en": "television; TV"
+    },
+    {
+      "hanzi": "电影",
+      "pinyin": "diàn yǐng",
+      "en": "movie; film"
+    },
+    {
+      "hanzi": "东西",
+      "pinyin": "dōng xī",
+      "en": "east and west"
+    },
+    {
+      "hanzi": "都",
+      "pinyin": "Dū",
+      "en": "surname Du"
+    },
+    {
+      "hanzi": "读",
+      "pinyin": "dòu",
+      "en": "comma; phrase marked by pause"
+    },
+    {
+      "hanzi": "对不起",
+      "pinyin": "duì bu qǐ",
+      "en": "I'm sorry; excuse me; I beg your pardon; to let (sb) down; to disappoint"
+    },
+    {
+      "hanzi": "多",
+      "pinyin": "duō",
+      "en": "many; much; too many; in excess"
+    },
+    {
+      "hanzi": "多少",
+      "pinyin": "duō shǎo",
+      "en": "number; amount"
+    },
+    {
+      "hanzi": "儿子",
+      "pinyin": "ér zi",
+      "en": "son"
+    },
+    {
+      "hanzi": "二",
+      "pinyin": "èr",
+      "en": "two; 2"
+    },
+    {
+      "hanzi": "饭馆",
+      "pinyin": "fàn guǎn",
+      "en": "restaurant"
+    },
+    {
+      "hanzi": "飞机",
+      "pinyin": "fēi jī",
+      "en": "airplane"
+    },
+    {
+      "hanzi": "分钟",
+      "pinyin": "fēn zhōng",
+      "en": "minute"
+    },
+    {
+      "hanzi": "高兴",
+      "pinyin": "gāo xìng",
+      "en": "happy; glad"
+    },
+    {
+      "hanzi": "个",
+      "pinyin": "gě",
+      "en": "used in 自个儿"
+    },
+    {
+      "hanzi": "工作",
+      "pinyin": "gōng zuò",
+      "en": "to work; (of a machine) to operate"
+    },
+    {
+      "hanzi": "狗",
+      "pinyin": "gǒu",
+      "en": "dog"
+    },
+    {
+      "hanzi": "汉语",
+      "pinyin": "Hàn yǔ",
+      "en": "Chinese language"
+    },
+    {
+      "hanzi": "好",
+      "pinyin": "hǎo",
+      "en": "good; appropriate; proper"
+    },
+    {
+      "hanzi": "喝",
+      "pinyin": "hē",
+      "en": "to drink; variant of 嗬"
+    },
+    {
+      "hanzi": "和",
+      "pinyin": "hé",
+      "en": "old variant of 和"
+    },
+    {
+      "hanzi": "很",
+      "pinyin": "hěn",
+      "en": "(adverb of degree); quite"
+    },
+    {
+      "hanzi": "后面",
+      "pinyin": "hòu mian",
+      "en": "the back; the rear; the last bit; behind; near the end; at the back"
+    },
+    {
+      "hanzi": "回",
+      "pinyin": "huí",
+      "en": "to circle; to go back"
+    },
+    {
+      "hanzi": "会",
+      "pinyin": "huì",
+      "en": "can; to have the skill; to know how to; to be likely to; to be sure to"
+    },
+    {
+      "hanzi": "火车站",
+      "pinyin": "huǒ chē zhàn",
+      "en": "train station"
+    },
+    {
+      "hanzi": "几",
+      "pinyin": "jī",
+      "en": "small table"
+    },
+    {
+      "hanzi": "家",
+      "pinyin": "jiā",
+      "en": "used in 家伙 and 家俱"
+    },
+    {
+      "hanzi": "叫",
+      "pinyin": "jiào",
+      "en": "to shout; to call"
+    },
+    {
+      "hanzi": "今天",
+      "pinyin": "jīn tiān",
+      "en": "today; at the present"
+    },
+    {
+      "hanzi": "九",
+      "pinyin": "jiǔ",
+      "en": "nine; 9"
+    },
+    {
+      "hanzi": "开",
+      "pinyin": "kāi",
+      "en": "to open (transitive or intransitive); (of ships, vehicles, troops etc) to start"
+    },
+    {
+      "hanzi": "看",
+      "pinyin": "kān",
+      "en": "to look after; to take care of"
+    },
+    {
+      "hanzi": "看见",
+      "pinyin": "kàn jiàn",
+      "en": "to see; to catch sight of"
+    },
+    {
+      "hanzi": "块",
+      "pinyin": "kuài",
+      "en": "lump; chunk; piece; classifier for pieces of cloth, cake, soap etc"
+    },
+    {
+      "hanzi": "来",
+      "pinyin": "lái",
+      "en": "to come; (used as a substitute for a more specific verb)"
+    },
+    {
+      "hanzi": "老师",
+      "pinyin": "lǎo shī",
+      "en": "teacher"
+    },
+    {
+      "hanzi": "了",
+      "pinyin": "le",
+      "en": "(completed action marker); (modal particle indicating change of state, situation now)"
+    },
+    {
+      "hanzi": "冷",
+      "pinyin": "Lěng",
+      "en": "surname Leng"
+    },
+    {
+      "hanzi": "里",
+      "pinyin": "lǐ",
+      "en": "variant of 里"
+    },
+    {
+      "hanzi": "零",
+      "pinyin": "líng",
+      "en": "zero; nought"
+    },
+    {
+      "hanzi": "六",
+      "pinyin": "liù",
+      "en": "six; 6"
+    },
+    {
+      "hanzi": "妈妈",
+      "pinyin": "mā ma",
+      "en": "mama; mommy"
+    },
+    {
+      "hanzi": "吗",
+      "pinyin": "má",
+      "en": "(coll.) what?"
+    },
+    {
+      "hanzi": "买",
+      "pinyin": "mǎi",
+      "en": "to buy; to purchase"
+    },
+    {
+      "hanzi": "猫",
+      "pinyin": "māo",
+      "en": "cat; (dialect) to hide oneself"
+    },
+    {
+      "hanzi": "没",
+      "pinyin": "méi",
+      "en": "(negative prefix for verbs) have not; not"
+    },
+    {
+      "hanzi": "没关系",
+      "pinyin": "méi guān xi",
+      "en": "it doesn't matter"
+    },
+    {
+      "hanzi": "米饭",
+      "pinyin": "mǐ fàn",
+      "en": "(cooked) rice"
+    },
+    {
+      "hanzi": "名字",
+      "pinyin": "míng zi",
+      "en": "name (of a person or thing)"
+    },
+    {
+      "hanzi": "明天",
+      "pinyin": "míng tiān",
+      "en": "tomorrow"
+    },
+    {
+      "hanzi": "哪",
+      "pinyin": "nǎ",
+      "en": "how; which"
+    },
+    {
+      "hanzi": "那",
+      "pinyin": "Nā",
+      "en": "surname Na"
+    },
+    {
+      "hanzi": "呢",
+      "pinyin": "ne",
+      "en": "particle indicating that a previously asked question is to be applied to the preceding word (\"What about ...?\", \"And ...?\"); particle for inquiring about location (\"Where is ...?\")"
+    },
+    {
+      "hanzi": "能",
+      "pinyin": "Néng",
+      "en": "surname Neng"
+    },
+    {
+      "hanzi": "你",
+      "pinyin": "nǐ",
+      "en": "you (informal, as opposed to courteous 您)"
+    },
+    {
+      "hanzi": "年",
+      "pinyin": "Nián",
+      "en": "surname Nian"
+    },
+    {
+      "hanzi": "女儿",
+      "pinyin": "nǚ ér",
+      "en": "daughter"
+    },
+    {
+      "hanzi": "朋友",
+      "pinyin": "péng you",
+      "en": "friend"
+    },
+    {
+      "hanzi": "漂亮",
+      "pinyin": "piào liang",
+      "en": "pretty; beautiful"
+    },
+    {
+      "hanzi": "苹果",
+      "pinyin": "píng guǒ",
+      "en": "apple"
+    },
+    {
+      "hanzi": "七",
+      "pinyin": "qī",
+      "en": "seven; 7"
+    },
+    {
+      "hanzi": "前面",
+      "pinyin": "qián miàn",
+      "en": "ahead; in front"
+    },
+    {
+      "hanzi": "钱",
+      "pinyin": "Qián",
+      "en": "surname Qian"
+    },
+    {
+      "hanzi": "请",
+      "pinyin": "qǐng",
+      "en": "to ask; to invite"
+    },
+    {
+      "hanzi": "去",
+      "pinyin": "qù",
+      "en": "to go; to go to (a place)"
+    },
+    {
+      "hanzi": "热",
+      "pinyin": "rè",
+      "en": "to warm up; to heat up"
+    },
+    {
+      "hanzi": "人",
+      "pinyin": "rén",
+      "en": "person; people"
+    },
+    {
+      "hanzi": "认识",
+      "pinyin": "rèn shi",
+      "en": "to know; to recognize"
+    },
+    {
+      "hanzi": "日",
+      "pinyin": "Rì",
+      "en": "abbr. for 本, Japan"
+    },
+    {
+      "hanzi": "三",
+      "pinyin": "Sān",
+      "en": "surname San"
+    },
+    {
+      "hanzi": "商店",
+      "pinyin": "shāng diàn",
+      "en": "store; shop"
+    },
+    {
+      "hanzi": "上",
+      "pinyin": "shǎng",
+      "en": "used in 上声"
+    },
+    {
+      "hanzi": "上午",
+      "pinyin": "shàng wǔ",
+      "en": "morning"
+    },
+    {
+      "hanzi": "少",
+      "pinyin": "shǎo",
+      "en": "few; less"
+    },
+    {
+      "hanzi": "什么",
+      "pinyin": "shén me",
+      "en": "what?; something"
+    },
+    {
+      "hanzi": "十",
+      "pinyin": "shí",
+      "en": "ten; 10"
+    },
+    {
+      "hanzi": "时候",
+      "pinyin": "shí hou",
+      "en": "time; length of time"
+    },
+    {
+      "hanzi": "是",
+      "pinyin": "shì",
+      "en": "to be (followed by substantives only); correct; right; true"
+    },
+    {
+      "hanzi": "书",
+      "pinyin": "Shū",
+      "en": "abbr. for 书经"
+    },
+    {
+      "hanzi": "谁",
+      "pinyin": "shéi",
+      "en": "who; also pr. [shuí]"
+    },
+    {
+      "hanzi": "水",
+      "pinyin": "Shuǐ",
+      "en": "surname Shui"
+    },
+    {
+      "hanzi": "水果",
+      "pinyin": "shuǐ guǒ",
+      "en": "fruit"
+    },
+    {
+      "hanzi": "睡觉",
+      "pinyin": "shuì jiào",
+      "en": "to go to bed; to sleep"
+    },
+    {
+      "hanzi": "说话",
+      "pinyin": "shuō huà",
+      "en": "to speak; to say"
+    },
+    {
+      "hanzi": "四",
+      "pinyin": "sì",
+      "en": "four; 4"
+    },
+    {
+      "hanzi": "岁",
+      "pinyin": "suì",
+      "en": "variant of 岁, year; years old"
+    },
+    {
+      "hanzi": "他",
+      "pinyin": "tā",
+      "en": "he; him (used for either sex when the sex is unknown or unimportant); (used before sb's name for emphasis)"
+    },
+    {
+      "hanzi": "她",
+      "pinyin": "tā",
+      "en": "she"
+    },
+    {
+      "hanzi": "太",
+      "pinyin": "tài",
+      "en": "highest; greatest"
+    },
+    {
+      "hanzi": "天气",
+      "pinyin": "tiān qì",
+      "en": "weather"
+    },
+    {
+      "hanzi": "听",
+      "pinyin": "yǐn",
+      "en": "smile (archaic)"
+    },
+    {
+      "hanzi": "同学",
+      "pinyin": "tóng xué",
+      "en": "to study at the same school; fellow student"
+    },
+    {
+      "hanzi": "喂",
+      "pinyin": "wéi",
+      "en": "hello (when answering the phone)"
+    },
+    {
+      "hanzi": "我",
+      "pinyin": "wǒ",
+      "en": "I; me; my"
+    },
+    {
+      "hanzi": "我们",
+      "pinyin": "wǒ men",
+      "en": "we; us"
+    },
+    {
+      "hanzi": "五",
+      "pinyin": "wǔ",
+      "en": "five; 5"
+    },
+    {
+      "hanzi": "喜欢",
+      "pinyin": "xǐ huan",
+      "en": "to like; to be fond of"
+    },
+    {
+      "hanzi": "下",
+      "pinyin": "xià",
+      "en": "down; downwards"
+    },
+    {
+      "hanzi": "下午",
+      "pinyin": "xià wǔ",
+      "en": "afternoon; p.m."
+    },
+    {
+      "hanzi": "下雨",
+      "pinyin": "xià yǔ",
+      "en": "to rain"
+    },
+    {
+      "hanzi": "先生",
+      "pinyin": "xiān sheng",
+      "en": "teacher; gentleman; sir; mister (Mr.)"
+    },
+    {
+      "hanzi": "现在",
+      "pinyin": "xiàn zài",
+      "en": "now; at present"
+    },
+    {
+      "hanzi": "想",
+      "pinyin": "xiǎng",
+      "en": "to think (about); to think of; to devise"
+    },
+    {
+      "hanzi": "小",
+      "pinyin": "xiǎo",
+      "en": "small; tiny"
+    },
+    {
+      "hanzi": "小姐",
+      "pinyin": "xiǎo jie",
+      "en": "young lady; miss"
+    },
+    {
+      "hanzi": "些",
+      "pinyin": "xiē",
+      "en": "classifier indicating a small amount or small number greater than 1: some, a few, several"
+    },
+    {
+      "hanzi": "写",
+      "pinyin": "xiě",
+      "en": "to write"
+    },
+    {
+      "hanzi": "谢谢",
+      "pinyin": "xiè xie",
+      "en": "to thank; thanks"
+    },
+    {
+      "hanzi": "星期",
+      "pinyin": "xīng qī",
+      "en": "week; day of the week"
+    },
+    {
+      "hanzi": "学生",
+      "pinyin": "xué sheng",
+      "en": "student; schoolchild"
+    },
+    {
+      "hanzi": "学习",
+      "pinyin": "xué xí",
+      "en": "to learn; to study"
+    },
+    {
+      "hanzi": "学校",
+      "pinyin": "xué xiào",
+      "en": "school"
+    },
+    {
+      "hanzi": "一",
+      "pinyin": "yī",
+      "en": "one; single"
+    },
+    {
+      "hanzi": "衣服",
+      "pinyin": "yī fu",
+      "en": "clothes"
+    },
+    {
+      "hanzi": "医生",
+      "pinyin": "yī shēng",
+      "en": "doctor"
+    },
+    {
+      "hanzi": "医院",
+      "pinyin": "yī yuàn",
+      "en": "hospital"
+    },
+    {
+      "hanzi": "椅子",
+      "pinyin": "yǐ zi",
+      "en": "chair"
+    },
+    {
+      "hanzi": "有",
+      "pinyin": "yǒu",
+      "en": "to have; there is; (bound form) having; with; -ful; -ed; -al (as in 意 intentional)"
+    },
+    {
+      "hanzi": "月",
+      "pinyin": "yuè",
+      "en": "moon; month"
+    },
+    {
+      "hanzi": "再见",
+      "pinyin": "zài jiàn",
+      "en": "goodbye; see you again later"
+    },
+    {
+      "hanzi": "在",
+      "pinyin": "zài",
+      "en": "to exist; to be alive; (of sb or sth) to be (located) at"
+    },
+    {
+      "hanzi": "怎么",
+      "pinyin": "zěn me",
+      "en": "how?; what?"
+    },
+    {
+      "hanzi": "怎么样",
+      "pinyin": "zěn me yàng",
+      "en": "how?; how about?"
+    },
+    {
+      "hanzi": "这",
+      "pinyin": "zhè",
+      "en": "(pronoun) this; these; (bound form) this; the (followed by a noun)"
+    },
+    {
+      "hanzi": "中国",
+      "pinyin": "Zhōng guó",
+      "en": "China"
+    },
+    {
+      "hanzi": "中午",
+      "pinyin": "zhōng wǔ",
+      "en": "noon; midday"
+    },
+    {
+      "hanzi": "住",
+      "pinyin": "zhù",
+      "en": "to live; to dwell"
+    },
+    {
+      "hanzi": "桌子",
+      "pinyin": "zhuō zi",
+      "en": "table; desk"
+    },
+    {
+      "hanzi": "字",
+      "pinyin": "zì",
+      "en": "letter; symbol"
+    },
+    {
+      "hanzi": "昨天",
+      "pinyin": "zuó tiān",
+      "en": "yesterday"
+    },
+    {
+      "hanzi": "坐",
+      "pinyin": "Zuò",
+      "en": "surname Zuo"
+    },
+    {
+      "hanzi": "做",
+      "pinyin": "zuò",
+      "en": "to make; to produce; to write; to compose"
+    }
+  ]
+}
