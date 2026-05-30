@@ -367,6 +367,7 @@ def main():
     print(f"음성 입력: /talk  (STT={args.asr_model}, 언어={args.asr_lang})")
     print(HELP)
     print("-" * 60)
+    print("(준비되면 Enter — 또는 바로 명령/한국어/중국어 입력)")
 
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
     last_cn_list = []
@@ -407,7 +408,7 @@ def main():
             print(f"[음성 입력 오류] {e}", file=sys.stderr)
             return None
 
-    turn("수업을 시작하자. 짧게 인사하고 첫 질문을 해줘.")
+    started = False  # 첫 빈 Enter 가 시작 신호
 
     while True:
         try:
@@ -418,7 +419,11 @@ def main():
             break
 
         if not user_in:
+            if not started:
+                started = True
+                turn("수업을 시작하자. 짧게 인사하고 첫 질문을 해줘.")
             continue
+        started = True
         parts = user_in.split()
         cmd = parts[0].lower()
 
