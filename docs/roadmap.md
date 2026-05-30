@@ -38,7 +38,7 @@
 - [x] 시작 자동 인사 → Enter 트리거(학습 준비 시간 확보)
 - [x] 단어장 편집·삭제 — CLI `/del 你好` + 웹 단어장 탭 🗑 버튼
 - [x] HSK 어휘 일괄 가져오기 — CLI `/import hsk1 [N]` + 웹 📥 (HSK1=150, HSK2=147, MIT 데이터: drkameleon/complete-hsk-vocabulary)
-- [ ] 복습-연동 회화(튜터가 오늘 due 단어를 대화에 녹임) — Pass B 예정
+- [x] 복습-연동 회화 — 회화 시작 시 오늘 due 단어 N개를 system 컨텍스트로 주입(`core.format_due_context`), CLI 첫 Enter/`/new` 와 웹 `_new_messages` 동시 적용 (2026-05-30)
 
 ## 후보 / 미래
 - Anki 내보내기(발음 mp3)

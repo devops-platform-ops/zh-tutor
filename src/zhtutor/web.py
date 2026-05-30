@@ -26,7 +26,12 @@ VOICE = z.detect_voice()
 
 
 def _new_messages():
-    return [{"role": "system", "content": z.SYSTEM_PROMPT}]
+    msgs = [{"role": "system", "content": z.SYSTEM_PROMPT}]
+    due = zc.due_cards(z.load_vocab(), zc.today_iso())
+    ctx = zc.format_due_context(due)
+    if ctx:
+        msgs.append({"role": "system", "content": ctx})
+    return msgs
 
 
 def _tmp_wav():

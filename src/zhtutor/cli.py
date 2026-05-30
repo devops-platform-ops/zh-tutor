@@ -387,6 +387,13 @@ def main():
     last_cn_list = []
     last_triples = []
 
+    def inject_due_context():
+        """현재 단어장의 due 단어를 system 컨텍스트로 messages에 주입."""
+        due = core.due_cards(load_vocab(), core.today_iso())
+        ctx = core.format_due_context(due)
+        if ctx:
+            messages.append({"role": "system", "content": ctx})
+
     def turn(user_text):
         nonlocal last_cn_list, last_triples
         messages.append({"role": "user", "content": user_text})
@@ -435,6 +442,7 @@ def main():
         if not user_in:
             if not started:
                 started = True
+                inject_due_context()
                 turn("수업을 시작하자. 짧게 인사하고 첫 질문을 해줘.")
             continue
         started = True
@@ -484,6 +492,7 @@ def main():
             last_cn_list = []
             last_triples = []
             print("(새 대화 시작)")
+            inject_due_context()
             turn("수업을 다시 시작하자. 짧게 인사하고 첫 질문을 해줘.")
             continue
         if cmd == "/save":

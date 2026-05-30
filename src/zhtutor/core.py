@@ -227,6 +227,20 @@ def merge_hsk(vocab, entries, limit=None):
     return added
 
 
+def format_due_context(due_entries, max_n=8):
+    """due 단어 리스트를 회화용 system 컨텍스트 텍스트로. 빈 입력이면 None.
+    오래된 due 우선(가장 늦게 본 단어 우선 복습). 영어 임시 뜻은 첫 ';' 앞만 사용."""
+    if not due_entries:
+        return None
+    picks = sorted(due_entries, key=lambda e: e.get("due", ""))[:max_n]
+    lines = []
+    for e in picks:
+        ko = (e.get("ko") or "").split(";")[0].strip() or "(뜻 미상)"
+        lines.append(f"- {e['hanzi']} ({ko})")
+    return ("[오늘 복습할 단어 — 대화에 자연스럽게 1~2회 녹여 학생이 듣고 입에 올릴 "
+            "기회를 만들 것. 강요·암기 지시 X]\n" + "\n".join(lines))
+
+
 def due_forecast(vocab, today):
     """due 분포: today(이전 포함)/tomorrow/this_week(+2~+7)/later/no_due."""
     today = _iso(today)

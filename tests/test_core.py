@@ -188,6 +188,46 @@ def test_due_forecast_buckets():
                  "later": 1, "no_due": 1}
 
 
+def test_format_due_context_empty_returns_none():
+    assert core.format_due_context([]) is None
+    assert core.format_due_context(None) is None
+
+
+def test_format_due_context_basic():
+    due = [{"hanzi": "你好", "ko": "안녕", "due": "2026-05-30"}]
+    msg = core.format_due_context(due)
+    assert msg is not None
+    assert msg.startswith("[오늘 복습할 단어")
+    assert "- 你好 (안녕)" in msg
+
+
+def test_format_due_context_max_n_and_order():
+    # 오래된 due 우선 (가장 늦게 본 단어부터 복습)
+    due = [{"hanzi": "C", "ko": "c", "due": "2026-05-30"},
+           {"hanzi": "A", "ko": "a", "due": "2026-05-25"},
+           {"hanzi": "B", "ko": "b", "due": "2026-05-28"},
+           {"hanzi": "D", "ko": "d", "due": "2026-05-31"}]
+    msg = core.format_due_context(due, max_n=2)
+    # A(05-25), B(05-28)만 포함, 그 외 제외
+    assert "- A (a)" in msg and "- B (b)" in msg
+    assert "- C (c)" not in msg and "- D (d)" not in msg
+    # 순서: A 먼저
+    assert msg.index("- A") < msg.index("- B")
+
+
+def test_format_due_context_trims_english_semicolons():
+    # HSK 임시 영어 뜻 "to love; affection" → 첫 부분만
+    due = [{"hanzi": "爱", "ko": "to love; to be fond of; affection",
+            "due": "2026-05-30"}]
+    msg = core.format_due_context(due)
+    assert "- 爱 (to love)" in msg
+
+
+def test_format_due_context_missing_ko_uses_placeholder():
+    due = [{"hanzi": "X", "due": "2026-05-30"}]  # ko 없음
+    assert "- X ((뜻 미상))" in core.format_due_context(due)
+
+
 def test_merge_hsk_adds_new_entries():
     vocab = []
     entries = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "en": "hello"},
