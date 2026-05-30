@@ -103,3 +103,99 @@ def test_score_pronunciation_perfect_is_100():
 def test_score_pronunciation_no_hanzi_returns_none():
     assert core.score_pronunciation("", "你好") is None
     assert core.score_pronunciation("hello", "你好") is None  # 타겟에 한자 없음
+
+
+# ---- 통계 (Phase 2) ----
+def test_streak_consecutive_from_today():
+    reviews = [{"day": "2026-05-30", "correct": 1},
+               {"day": "2026-05-29", "correct": 0},
+               {"day": "2026-05-28", "correct": 1},
+               {"day": "2026-05-26", "correct": 1}]  # 27 빠짐 → 28에서 끊김
+    assert core.streak_days(reviews, "2026-05-30") == 3
+
+
+def test_streak_today_missing_is_zero():
+    # 사양: today 학습 없으면 0 (어제까지 연속이어도)
+    reviews = [{"day": "2026-05-29", "correct": 1},
+               {"day": "2026-05-28", "correct": 1}]
+    assert core.streak_days(reviews, "2026-05-30") == 0
+
+
+def test_streak_empty_reviews_is_zero():
+    assert core.streak_days([], "2026-05-30") == 0
+
+
+def test_accuracy_empty_returns_none():
+    assert core.accuracy([]) is None
+    # since 필터로 0건이 된 경우도 None
+    assert core.accuracy([{"day": "2026-01-01", "correct": 1}],
+                         since="2026-05-30") is None
+
+
+def test_accuracy_with_since_filter():
+    reviews = [{"day": "2026-05-20", "correct": 1},
+               {"day": "2026-05-29", "correct": 1},
+               {"day": "2026-05-30", "correct": 0}]
+    # 전체: 2/3
+    assert abs(core.accuracy(reviews) - 2 / 3) < 1e-9
+    # since 5-29 이후: 1/2
+    assert core.accuracy(reviews, since="2026-05-29") == 0.5
+
+
+def test_daily_counts_shape_and_zero_days():
+    reviews = [{"day": "2026-05-30", "correct": 1},
+               {"day": "2026-05-30", "correct": 0},
+               {"day": "2026-05-28", "correct": 1}]
+    out = core.daily_counts(reviews, "2026-05-30", 7)
+    assert len(out) == 7
+    assert out[0]["day"] == "2026-05-24" and out[0]["n"] == 0
+    assert out[-1]["day"] == "2026-05-30"
+    assert out[-1]["n"] == 2 and out[-1]["correct"] == 1
+    # 5-28 = index 4 (today-2)
+    assert out[4]["n"] == 1 and out[4]["correct"] == 1
+
+
+def test_daily_counts_ignores_out_of_range():
+    # 학습 일자가 days=7 범위 밖이면 결과에 안 나타남
+    reviews = [{"day": "2026-05-15", "correct": 1}]
+    out = core.daily_counts(reviews, "2026-05-30", 7)
+    assert sum(d["n"] for d in out) == 0
+
+
+def test_box_distribution_mixed():
+    vocab = [{"hanzi": "A", "box": 1},
+             {"hanzi": "B", "box": 3},
+             {"hanzi": "C", "box": 3},
+             {"hanzi": "D", "box": 5},
+             {"hanzi": "E"}]  # box 없음
+    dist = core.box_distribution(vocab)
+    assert dist[1] == 1 and dist[3] == 2 and dist[5] == 1
+    assert dist[2] == 0 and dist[4] == 0
+    assert dist[None] == 1
+
+
+def test_due_forecast_buckets():
+    today = "2026-05-30"
+    vocab = [{"hanzi": "past", "due": "2026-05-25"},   # today 버킷
+             {"hanzi": "today", "due": today},          # today
+             {"hanzi": "tom", "due": "2026-05-31"},     # tomorrow
+             {"hanzi": "wk", "due": "2026-06-05"},      # this_week (+6)
+             {"hanzi": "edge", "due": "2026-06-06"},    # this_week 경계(+7)
+             {"hanzi": "later", "due": "2026-06-07"},   # later (+8)
+             {"hanzi": "none"}]                          # no_due
+    f = core.due_forecast(vocab, today)
+    assert f == {"today": 2, "tomorrow": 1, "this_week": 2,
+                 "later": 1, "no_due": 1}
+
+
+def test_stats_handles_date_objects():
+    # 방어 코드: repo가 정규화 안 했어도 datetime.date 들어오면 동작
+    import datetime
+    d_today = datetime.date(2026, 5, 30)
+    reviews = [{"day": d_today, "correct": 1},
+               {"day": datetime.date(2026, 5, 29), "correct": 0}]
+    # 정답/오답 무관, 학습한 일자만 셈 → 5-30, 5-29 연속 = 2
+    assert core.streak_days(reviews, d_today) == 2
+    assert core.accuracy(reviews) == 0.5
+    vocab = [{"hanzi": "A", "due": datetime.date(2026, 5, 31)}]
+    assert core.due_forecast(vocab, d_today)["tomorrow"] == 1

@@ -42,3 +42,19 @@ def log_review(user_id, hanzi, correct, day):
     db.execute(
         "INSERT INTO review_log (user_id,day,hanzi,correct) VALUES (%s,%s,%s,%s)",
         (user_id, day, hanzi, 1 if correct else 0))
+
+
+def get_review_log(user_id):
+    """전체 학습 로그. day는 iso 문자열로 정규화."""
+    rows = db.query(
+        "SELECT day,hanzi,correct FROM review_log WHERE user_id=%s ORDER BY id",
+        (user_id,))
+    out = []
+    for r in rows:
+        d = r["day"]
+        out.append({
+            "day": d.isoformat() if hasattr(d, "isoformat") else str(d),
+            "hanzi": r["hanzi"],
+            "correct": int(r["correct"] or 0),
+        })
+    return out

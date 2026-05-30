@@ -268,6 +268,45 @@ def transcribe(audio, model, language):
     return "".join(seg.text for seg in segments).strip()
 
 
+def _print_stats():
+    vocab = load_vocab()
+    reviews = repo.get_review_log(USER_ID)
+    today = core.today_iso()
+    print(f"\n📊 학습 통계 ({today} 기준)")
+    if not vocab and not reviews:
+        print("  (아직 단어장도 복습 기록도 없어요 — /add 또는 /save 부터)")
+        return
+    streak = core.streak_days(reviews, today)
+    streak_hint = "" if streak > 0 else "  (오늘 한 번 복습해 보세요)"
+    print(f"  🔥 연속 학습일: {streak}일{streak_hint}")
+    acc_all = core.accuracy(reviews)
+    if acc_all is None:
+        print("  🎯 정확도: (복습 기록 없음)")
+    else:
+        total = len(reviews)
+        correct = int(round(acc_all * total))
+        line = f"  🎯 정확도: 전체 {acc_all * 100:.0f}% ({correct}/{total})"
+        since_7 = core.add_days(today, -6)
+        acc_7 = core.accuracy(reviews, since=since_7)
+        if acc_7 is not None:
+            n_7 = sum(1 for r in reviews if r["day"] >= since_7)
+            c_7 = int(round(acc_7 * n_7))
+            line += f"  ·  최근 7일 {acc_7 * 100:.0f}% ({c_7}/{n_7})"
+        print(line)
+    daily = core.daily_counts(reviews, today, 7)
+    parts = []
+    for d in daily:
+        tag = "오늘" if d["day"] == today else d["day"][5:]  # MM-DD
+        parts.append(f"{tag}={d['correct']}/{d['n']}")
+    print("  📈 최근 7일: " + "  ".join(parts))
+    box = core.box_distribution(vocab)
+    box_parts = [f"[{b}]{box[b]}" for b in (1, 2, 3, 4, 5)]
+    print(f"  📦 box: {'  '.join(box_parts)}  미시작 {box[None]}")
+    f = core.due_forecast(vocab, today)
+    print(f"  📅 due: 오늘 {f['today']} / 내일 {f['tomorrow']}"
+          f" / 이번 주 {f['this_week']} / 나중 {f['later']} / 예약없음 {f['no_due']}")
+
+
 HELP = """\
 명령어:
   /q, /quit   종료
@@ -278,6 +317,7 @@ HELP = """\
   /add 你好   단어 직접 추가 (핀인 자동 + 뜻 조회)
   /vocab      단어장 보기
   /review     오늘 복습 (SRS / 전체: /review all)
+  /stats      학습 통계 (연속일·정확도·box·due)
   /commit     데이터 저장 (Dolt 커밋)
   /voice      발음 ON/OFF 토글
   /slow       느린 발음 ON/OFF 토글
@@ -391,6 +431,9 @@ def main():
             continue
         if cmd == "/commit":
             print("  (커밋됨)" if db.commit("zh 수동 커밋") else "  (변경 없음)")
+            continue
+        if cmd == "/stats":
+            _print_stats()
             continue
         if cmd == "/say":
             if not last_cn_list:

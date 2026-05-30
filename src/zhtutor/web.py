@@ -14,6 +14,7 @@ import gradio as gr  # noqa: E402
 
 from zhtutor import cli as z  # noqa: E402
 from zhtutor import core as zc  # noqa: E402
+from zhtutor import repo  # noqa: E402
 
 MODEL = "deepseek-v4-pro"
 ASR_MODEL = "small"
@@ -216,6 +217,67 @@ def review_next(st):
     return st, _rev_progress(st), _rev_prompt(st), "", None, "", None
 
 
+# ---- 통계 탭 (Phase 2) ----
+DAILY_HEADERS = ["날짜", "학습", "정답", "정확도"]
+BOX_HEADERS = ["box", "카드 수"]
+DUE_HEADERS = ["구간", "수"]
+
+
+def _stats_summary(vocab, reviews, today):
+    if not vocab and not reviews:
+        return "*(아직 단어장도 복습 기록도 없어요 — 회화 탭에서 시작해 보세요)*"
+    streak = zc.streak_days(reviews, today)
+    acc_all = zc.accuracy(reviews)
+    since_7 = zc.add_days(today, -6)
+    acc_7 = zc.accuracy(reviews, since=since_7)
+    if acc_all is None:
+        acc_line = "복습 기록 없음"
+    else:
+        total = len(reviews)
+        line = f"전체 **{acc_all * 100:.0f}%** ({int(round(acc_all * total))}/{total})"
+        if acc_7 is not None:
+            n_7 = sum(1 for r in reviews if r["day"] >= since_7)
+            line += (f"  ·  최근 7일 **{acc_7 * 100:.0f}%** "
+                     f"({int(round(acc_7 * n_7))}/{n_7})")
+        acc_line = line
+    return (f"### 📊 학습 통계 ({today})\n"
+            f"- 🔥 **연속 학습일**: {streak}일\n"
+            f"- 🎯 **정확도**: {acc_line}")
+
+
+def _daily_rows(reviews, today):
+    rows = []
+    for d in zc.daily_counts(reviews, today, 7):
+        acc = f"{d['correct'] / d['n'] * 100:.0f}%" if d['n'] else "-"
+        tag = "오늘" if d['day'] == today else d['day']
+        rows.append([tag, d['n'], d['correct'], acc])
+    return rows
+
+
+def _box_rows(vocab):
+    box = zc.box_distribution(vocab)
+    return [[f"box {b}", box[b]] for b in (1, 2, 3, 4, 5)] + [["미시작", box[None]]]
+
+
+def _due_rows(vocab, today):
+    f = zc.due_forecast(vocab, today)
+    return [["오늘 (지난 것 포함)", f["today"]],
+            ["내일", f["tomorrow"]],
+            ["이번 주 (2~7일)", f["this_week"]],
+            ["나중", f["later"]],
+            ["예약 없음", f["no_due"]]]
+
+
+def stats_load():
+    vocab = z.load_vocab()
+    reviews = repo.get_review_log(z.USER_ID)
+    today = zc.today_iso()
+    return (_stats_summary(vocab, reviews, today),
+            _daily_rows(reviews, today),
+            _box_rows(vocab),
+            _due_rows(vocab, today))
+
+
 def build():
     with gr.Blocks(title="中文 튜터") as demo:
         gr.Markdown("# 中文 회화 튜터\n"
@@ -290,6 +352,19 @@ def build():
                 rev_next.click(review_next, [st_rev], start_out)
                 rev_mic.stop_recording(
                     lambda: "🎤 녹음 완료 — ‘채점’을 누르세요", None, [rev_result])
+
+            with gr.Tab("통계"):
+                stats_md = gr.Markdown("탭을 처음 열면 자동으로 채워집니다.")
+                stats_btn = gr.Button("🔄 새로고침")
+                stats_daily = gr.Dataframe(headers=DAILY_HEADERS, interactive=False,
+                                           label="최근 7일 학습")
+                stats_box = gr.Dataframe(headers=BOX_HEADERS, interactive=False,
+                                         label="box 분포 (Leitner SRS)")
+                stats_due = gr.Dataframe(headers=DUE_HEADERS, interactive=False,
+                                         label="복습 예보")
+                stats_outs = [stats_md, stats_daily, stats_box, stats_due]
+                stats_btn.click(stats_load, None, stats_outs)
+                demo.load(stats_load, None, stats_outs)
     return demo
 
 

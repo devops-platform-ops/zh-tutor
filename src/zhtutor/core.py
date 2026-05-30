@@ -145,3 +145,79 @@ def schedule(entry, correct, today):
     entry["box"] = box
     entry["due"] = add_days(today, SRS_INTERVALS[box])
     entry["last"] = today
+
+
+# ---- 통계 (Phase 2) ----
+def _iso(d):
+    """DATE/datetime/str 어떤 게 들어와도 'YYYY-MM-DD' 문자열로."""
+    if d is None:
+        return None
+    return d.isoformat() if hasattr(d, "isoformat") else str(d)[:10]
+
+
+def streak_days(reviews, today):
+    """today부터 거꾸로, 학습 기록이 있는 일자가 연속한 수.
+    today에 기록이 없으면 0 (단순·예측가능 정책)."""
+    today = _iso(today)
+    days = {_iso(r["day"]) for r in reviews}
+    n, cur = 0, today
+    while cur in days:
+        n += 1
+        cur = add_days(cur, -1)
+    return n
+
+
+def accuracy(reviews, since=None):
+    """정답 비율 0.0~1.0. 기록 0건이면 None. since(iso) 이후만 집계."""
+    since = _iso(since)
+    rs = reviews if since is None else [r for r in reviews if _iso(r["day"]) >= since]
+    if not rs:
+        return None
+    return sum(int(r["correct"] or 0) for r in rs) / len(rs)
+
+
+def daily_counts(reviews, today, days=7):
+    """오늘 포함 최근 days일의 일별 (학습수, 정답수). 과거→오늘 순서."""
+    today = _iso(today)
+    by_day = {}
+    for r in reviews:
+        d = _iso(r["day"])
+        slot = by_day.setdefault(d, [0, 0])
+        slot[0] += 1
+        slot[1] += int(r["correct"] or 0)
+    out = []
+    for i in range(days - 1, -1, -1):
+        d = add_days(today, -i)
+        n, c = by_day.get(d, (0, 0))
+        out.append({"day": d, "n": n, "correct": c})
+    return out
+
+
+def box_distribution(vocab):
+    """box 1~5 별 카드 수. box 없는(미시작) 카드는 None 키로."""
+    dist = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, None: 0}
+    for e in vocab:
+        b = e.get("box")
+        dist[b if b in (1, 2, 3, 4, 5) else None] += 1
+    return dist
+
+
+def due_forecast(vocab, today):
+    """due 분포: today(이전 포함)/tomorrow/this_week(+2~+7)/later/no_due."""
+    today = _iso(today)
+    tom = add_days(today, 1)
+    week_end = add_days(today, 7)
+    buckets = {"today": 0, "tomorrow": 0, "this_week": 0, "later": 0, "no_due": 0}
+    for e in vocab:
+        due = _iso(e.get("due"))
+        if due is None:
+            buckets["no_due"] += 1
+        elif due <= today:
+            buckets["today"] += 1
+        elif due == tom:
+            buckets["tomorrow"] += 1
+        elif due <= week_end:
+            buckets["this_week"] += 1
+        else:
+            buckets["later"] += 1
+    return buckets

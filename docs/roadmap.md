@@ -17,9 +17,12 @@
 - [x] 데이터 커밋: `/commit` + 세션 종료 시 자동
 - [x] `core.py`(순수 로직 분리) — 텍스트 파싱·발음 채점·add_entry·SRS를 모듈로 추출, cli/web 직접 사용, pytest 14건 통과 (2026-05-30)
 
-## Phase 2 — 학습 통계 대시보드
-- `review_log` 쿼리 기반: 연속 학습일·정확도·오늘/주간·box 분포·복습 예보(due)
-- CLI `/stats` + 웹 "통계" 탭
+## Phase 2 — 학습 통계 대시보드 ✅ 완료
+- [x] `core` 통계 함수: `streak_days`, `accuracy`, `daily_counts`, `box_distribution`, `due_forecast` (입력 정규화 `_iso` 방어층 포함)
+- [x] `repo.get_review_log(user_id)` — day는 iso 문자열 정규화
+- [x] CLI `/stats` — 연속일·정확도(전체/7일)·일별·box·due 한 화면
+- [x] 웹 "통계" 탭 — Markdown 요약 + Dataframe 3개(7일/box/due), 탭 열 때 자동 로드
+- [x] pytest 24건 통과 (엣지: 빈 데이터·box NULL·due no_due·범위 밖·date 객체 방어)
 
 ## Phase 3 — 제품화 (검증 후)
 - 실제 인증(회원가입/로그인/세션), `user_id` 시임에 결합
