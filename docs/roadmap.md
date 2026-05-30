@@ -15,7 +15,7 @@
 - [x] 기존 `vocab.json` → vocab 테이블(user_id=1 'local') 마이그레이션
 - [x] 인증 기본 유저 스텁(`ZH_USER`). CLI·웹 동일 동작 검증
 - [x] 데이터 커밋: `/commit` + 세션 종료 시 자동
-- [ ] `core.py`(순수 로직 분리)는 후속 리팩터로 이연(현재 cli.py에 상주, 멀티테넌트엔 영향 없음)
+- [x] `core.py`(순수 로직 분리) — 텍스트 파싱·발음 채점·add_entry·SRS를 모듈로 추출, cli/web 직접 사용, pytest 14건 통과 (2026-05-30)
 
 ## Phase 2 — 학습 통계 대시보드
 - `review_log` 쿼리 기반: 연속 학습일·정확도·오늘/주간·box 분포·복습 예보(due)

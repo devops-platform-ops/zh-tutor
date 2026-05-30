@@ -13,6 +13,7 @@ os.environ.setdefault("GRADIO_ANALYTICS_ENABLED", "False")
 import gradio as gr  # noqa: E402
 
 from zhtutor import cli as z  # noqa: E402
+from zhtutor import core as zc  # noqa: E402
 
 MODEL = "deepseek-v4-pro"
 ASR_MODEL = "small"
@@ -66,7 +67,7 @@ def respond(user_text, history, messages):
         messages = [messages[0]] + messages[-20:]
 
     audio = None
-    cn = "".join(z.extract_chinese_list(acc))
+    cn = "".join(zc.extract_chinese_list(acc))
     if cn and VOICE:
         audio = z.tts_to_file(cn, VOICE, _tmp_wav())
     yield history, messages, audio, ""
@@ -96,11 +97,11 @@ def vocab_rows():
 def save_last(messages):
     reply = next((m["content"] for m in reversed(messages or [])
                   if m.get("role") == "assistant"), "")
-    triples = z.parse_triples(reply)
+    triples = zc.parse_triples(reply)
     if not triples:
         return vocab_rows(), "저장할 항목이 없습니다 (회화를 먼저 진행하세요)"
     v = z.load_vocab()
-    added = sum(z.add_entry(v, t["hanzi"], t.get("pinyin", ""), t.get("ko", ""))
+    added = sum(zc.add_entry(v, t["hanzi"], t.get("pinyin", ""), t.get("ko", ""))
                 for t in triples)
     z.save_vocab(v)
     return vocab_rows(), f"📒 {added}개 새로 저장 (총 {len(v)}개)"
@@ -112,7 +113,7 @@ def add_word(word):
         return vocab_rows(), "단어를 입력하세요", ""
     try:
         from pypinyin import Style, lazy_pinyin
-        py = " ".join(lazy_pinyin(z.han_only(word) or word, style=Style.TONE))
+        py = " ".join(lazy_pinyin(zc.han_only(word) or word, style=Style.TONE))
     except Exception:
         py = ""
     ko = "(뜻 미확인)"
@@ -126,7 +127,7 @@ def add_word(word):
         except RuntimeError:
             pass
     v = z.load_vocab()
-    is_new = z.add_entry(v, word, py, ko)
+    is_new = zc.add_entry(v, word, py, ko)
     z.save_vocab(v)
     state = "추가" if is_new else "이미 있음(횟수+1)"
     return vocab_rows(), f"📒 {state}: {word} ({py}) — {ko}  [총 {len(v)}개]", ""
@@ -149,8 +150,8 @@ def _empty_rev():
 
 def review_start(mode, st):
     v = z.load_vocab()
-    today = z._today()
-    cards = list(v) if mode == "전체" else z.due_cards(v, today)
+    today = zc.today_iso()
+    cards = list(v) if mode == "전체" else zc.due_cards(v, today)
     random.shuffle(cards)
     queue = [{"hanzi": c["hanzi"], "ko": c.get("ko", ""),
               "pinyin": c.get("pinyin", "")} for c in cards]
@@ -175,25 +176,25 @@ def review_grade(st, text, mic):
         except Exception as e:
             heard, detail = "", f"(인식 오류: {e})"
         if heard:
-            res = z.score_pronunciation(target, heard)
+            res = zc.score_pronunciation(target, heard)
             if res is None:
-                correct = z.han_only(heard) == z.han_only(target)
+                correct = zc.han_only(heard) == zc.han_only(target)
                 detail = f"🎤 {heard}"
             else:
-                correct = res["score"] >= z.SRS_PASS
+                correct = res["score"] >= zc.SRS_PASS
                 detail = f"🎤 {heard} ({res['h_disp']}) · 점수 {res['score']}/100"
                 if res["problems"]:
                     detail += " — " + "; ".join(res["problems"][:2])
     elif (text or "").strip():
-        correct = z.han_only(text) == z.han_only(target)
+        correct = zc.han_only(text) == zc.han_only(target)
         detail = f"입력: {text}"
     else:
         detail = "답이 없어 '모름'으로 처리"
     v = z.load_vocab()
-    today = z._today()
+    today = zc.today_iso()
     for e in v:
         if e.get("hanzi") == target:
-            z.schedule(e, correct, today)
+            zc.schedule(e, correct, today)
             break
     z.save_vocab(v)
     z.log_review(target, correct, today)

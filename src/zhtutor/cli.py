@@ -8,26 +8,21 @@
   실행: zh   (또는 python -m zhtutor.cli)
 """
 import argparse
-import datetime
-import difflib
 import json
 import os
 import random
-import re
 import subprocess
 import sys
 import urllib.error
 import urllib.request
 
-from . import db, repo
+from . import core, db, repo
 
 API_URL = "https://api.deepseek.com/chat/completions"
 DEFAULT_RATE = 170   # say -r (입문자용 약간 느리게)
 SLOW_RATE = 110
 VOCAB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vocab.json")
 USER_ID = int(os.environ.get("ZH_USER", "1"))  # 인증 전: 기본 유저 스텁
-SRS_INTERVALS = {1: 1, 2: 2, 3: 4, 4: 8, 5: 16}  # box → 다음 복습까지 일수
-SRS_PASS = 60  # 음성 답 정답 기준 점수
 
 SYSTEM_PROMPT = """너는 한국인 '완전 입문자'(제로~HSK1-2 수준)를 위한 친절하고 인내심 있는 1:1 중국어 회화 튜터다.
 
@@ -46,9 +41,6 @@ SYSTEM_PROMPT = """너는 한국인 '완전 입문자'(제로~HSK1-2 수준)를 
 [진도와 톤]
 - 2~3턴에 한 번만 새 단어/표현 1개를 도입하고, 이전에 배운 것을 살짝 복습시킨다.
 - 절대 길게 설명하지 말 것. 입문자가 부담을 느끼지 않게 짧고 격려하는 톤으로."""
-
-# CJK 한자 + 중국어 문장부호만 (한글 AC00-D7A3, 핀인 Latin 은 제외됨)
-_HAN = re.compile(r"[㐀-鿿，。、？！：；…—（）《》「」“”‘’]")
 
 _proc = None
 
@@ -81,81 +73,7 @@ def detect_voice():
     return None
 
 
-def extract_chinese(text):
-    cn_lines = [ln for ln in text.splitlines() if "🇨🇳" in ln]
-    src = "\n".join(cn_lines) if cn_lines else text
-    return "".join(_HAN.findall(src))
-
-
-def extract_chinese_list(text):
-    """🇨🇳 줄별로 한 문장씩 리스트로. 마커 없으면 전체를 한 문장 취급."""
-    cn_lines = [ln for ln in text.splitlines() if "🇨🇳" in ln]
-    if not cn_lines:
-        whole = "".join(_HAN.findall(text))
-        return [whole] if whole else []
-    out = []
-    for ln in cn_lines:
-        s = "".join(_HAN.findall(ln))
-        if s:
-            out.append(s)
-    return out
-
-
-def han_only(text):
-    """비교용: 한자만 남김 (문장부호·공백 제거)."""
-    return re.sub(r"[^㐀-鿿]", "", text)
-
-
-_TONE_KR = {"1": "1성", "2": "2성", "3": "3성", "4": "4성", "5": "경성"}
-
-
-def _tone_num(syl):
-    return syl[-1] if syl and syl[-1].isdigit() else "5"
-
-
-def score_pronunciation(target, heard):
-    """목표 vs 내 발음을 핀인 음절+성조로 비교해 점수/피드백 반환. 한자 없으면 None."""
-    from pypinyin import Style, lazy_pinyin
-    t_han = han_only(target)
-    if not t_han:
-        return None
-    h_han = han_only(heard)
-    t_tl = lazy_pinyin(t_han, style=Style.NORMAL)
-    t_t3 = lazy_pinyin(t_han, style=Style.TONE3, neutral_tone_with_five=True)
-    h_tl = lazy_pinyin(h_han, style=Style.NORMAL) if h_han else []
-    h_t3 = lazy_pinyin(h_han, style=Style.TONE3, neutral_tone_with_five=True) if h_han else []
-    t_disp = " ".join(lazy_pinyin(t_han, style=Style.TONE))
-    h_disp = " ".join(lazy_pinyin(h_han, style=Style.TONE)) if h_han else "(중국어로 인식 안 됨)"
-
-    n = len(t_tl)
-    sm = difflib.SequenceMatcher(a=t_tl, b=h_tl, autojunk=False)
-    sound_match = tone_match = 0
-    problems = []
-    for tag, i1, i2, j1, j2 in sm.get_opcodes():
-        if tag == "equal":
-            for k in range(i2 - i1):
-                ti, hj = i1 + k, j1 + k
-                sound_match += 1
-                if t_t3[ti] == h_t3[hj]:
-                    tone_match += 1
-                else:
-                    problems.append(
-                        f"{t_han[ti]} {_TONE_KR[_tone_num(t_t3[ti])]}({t_t3[ti]})"
-                        f" → {_TONE_KR[_tone_num(h_t3[hj])]}({h_t3[hj]})로 들림")
-        elif tag == "replace":
-            got = " ".join(h_t3[j1:j2])
-            problems.append(f"{t_han[i1:i2]}({' '.join(t_t3[i1:i2])}) 발음이 다름"
-                            + (f" (들린: {got})" if got else ""))
-        elif tag == "delete":
-            problems.append(f"{t_han[i1:i2]}({' '.join(t_t3[i1:i2])}) 빠짐")
-        elif tag == "insert":
-            problems.append(f"군더더기: {' '.join(h_t3[j1:j2])}")
-
-    overall = round(100 * (0.7 * sound_match / n + 0.3 * tone_match / n))
-    return {"score": overall, "t_disp": t_disp, "h_disp": h_disp, "problems": problems}
-
-
-# ---- 단어장 (vocab.json 누적) ----
+# ---- 단어장 (Dolt 위임 얇은 래퍼) ----
 def load_vocab():
     return repo.get_vocab(USER_ID)
 
@@ -166,62 +84,6 @@ def save_vocab(vocab):
 
 def log_review(hanzi, correct, day):
     repo.log_review(USER_ID, hanzi, correct, day)
-
-
-def add_entry(vocab, hanzi, pinyin, ko):
-    """hanzi 기준 중복 제거. 새로 추가하면 True, 기존이면 count+1 후 False."""
-    hanzi = (hanzi or "").strip()
-    if not hanzi:
-        return False
-    for e in vocab:
-        if e.get("hanzi") == hanzi:
-            e["count"] = e.get("count", 1) + 1
-            if ko and e.get("ko") in (None, "", "(뜻 미확인)"):
-                e["ko"] = ko
-            if pinyin and not e.get("pinyin"):
-                e["pinyin"] = pinyin
-            return False
-    vocab.append({"hanzi": hanzi, "pinyin": pinyin, "ko": ko,
-                  "added": datetime.date.today().isoformat(), "count": 1})
-    return True
-
-
-def parse_triples(reply):
-    """답변의 🇨🇳/🔤/🇰🇷 3줄 블록 → [{hanzi, pinyin, ko}, ...]."""
-    out, cur = [], {}
-    for ln in reply.splitlines():
-        if "🇨🇳" in ln:
-            if cur.get("hanzi"):
-                out.append(cur)
-            cur = {"hanzi": ln.split("🇨🇳", 1)[1].strip(), "pinyin": "", "ko": ""}
-        elif "🔤" in ln and cur:
-            cur["pinyin"] = ln.split("🔤", 1)[1].strip()
-        elif "🇰🇷" in ln and cur:
-            cur["ko"] = ln.split("🇰🇷", 1)[1].strip()
-    if cur.get("hanzi"):
-        out.append(cur)
-    return out
-
-
-# ---- 복습 SRS (Leitner) ----
-def _today():
-    return datetime.date.today().isoformat()
-
-
-def add_days(iso, days):
-    return (datetime.date.fromisoformat(iso) + datetime.timedelta(days=days)).isoformat()
-
-
-def due_cards(vocab, today):
-    """due ≤ 오늘 (due 없는 기존 항목은 오늘로 간주 → 바로 복습 대상)."""
-    return [e for e in vocab if e.get("due", today) <= today]
-
-
-def schedule(entry, correct, today):
-    box = min(entry.get("box", 1) + 1, 5) if correct else 1
-    entry["box"] = box
-    entry["due"] = add_days(today, SRS_INTERVALS[box])
-    entry["last"] = today
 
 
 def speak(text, voice, rate):
@@ -481,8 +343,8 @@ def main():
             messages.pop()  # 실패한 user 턴 롤백
             return
         messages.append({"role": "assistant", "content": reply})
-        last_cn_list = extract_chinese_list(reply)
-        last_triples = parse_triples(reply)
+        last_cn_list = core.extract_chinese_list(reply)
+        last_triples = core.parse_triples(reply)
         if last_cn_list and voice_on:
             speak("".join(last_cn_list), voice, rate)
         if len(last_cn_list) > 1:
@@ -567,7 +429,7 @@ def main():
                 print("(저장할 항목이 없습니다 — 먼저 대화를 진행하세요)")
                 continue
             vocab = load_vocab()
-            added = sum(add_entry(vocab, t["hanzi"], t.get("pinyin", ""),
+            added = sum(core.add_entry(vocab, t["hanzi"], t.get("pinyin", ""),
                                   t.get("ko", "")) for t in last_triples)
             save_vocab(vocab)
             print(f"  📒 {added}개 새로 저장 (총 {len(vocab)}개)")
@@ -579,7 +441,7 @@ def main():
                 continue
             try:
                 from pypinyin import Style, lazy_pinyin
-                py = " ".join(lazy_pinyin(han_only(word) or word, style=Style.TONE))
+                py = " ".join(lazy_pinyin(core.han_only(word) or word, style=Style.TONE))
             except Exception:
                 py = ""
             ko = "(뜻 미확인)"
@@ -593,7 +455,7 @@ def main():
             except RuntimeError as e:
                 print(f"  (뜻 조회 실패: {e} — 핀인만 저장)", file=sys.stderr)
             vocab = load_vocab()
-            is_new = add_entry(vocab, word, py, ko)
+            is_new = core.add_entry(vocab, word, py, ko)
             save_vocab(vocab)
             state = "추가" if is_new else "이미 있음(횟수+1)"
             print(f"  📒 {state}: {word} ({py}) — {ko}  [총 {len(vocab)}개]")
@@ -617,9 +479,9 @@ def main():
             if not vocab:
                 print("(단어장이 비어 복습할 게 없습니다 — /save 또는 /add)")
                 continue
-            today = _today()
+            today = core.today_iso()
             review_all = len(parts) > 1 and parts[1].lower() == "all"
-            cards = list(vocab) if review_all else due_cards(vocab, today)
+            cards = list(vocab) if review_all else core.due_cards(vocab, today)
             if not cards:
                 print("(오늘 복습할 카드가 없습니다. 전체 복습: /review all)")
                 continue
@@ -641,25 +503,25 @@ def main():
                 elif low == "t":
                     heard = listen()
                     if heard:
-                        res = score_pronunciation(target, heard)
+                        res = core.score_pronunciation(target, heard)
                         if res is None:
-                            correct = han_only(heard) == han_only(target)
+                            correct = core.han_only(heard) == core.han_only(target)
                             print(f"  🎤 내 발음: {heard}")
                         else:
-                            correct = res["score"] >= SRS_PASS
+                            correct = res["score"] >= core.SRS_PASS
                             line = (f"  🎤 {heard} ({res['h_disp']})"
                                     f"  점수 {res['score']}/100")
                             if res["problems"]:
                                 line += " — " + "; ".join(res["problems"][:2])
                             print(line)
                 else:
-                    correct = han_only(ans) == han_only(target)
+                    correct = core.han_only(ans) == core.han_only(target)
                 mark = "✅ 정답" if correct else "❌"
                 print(f"  {mark}  →  {target}  {card.get('pinyin', '')}"
                       f"  — {card.get('ko', '')}")
                 if voice:
                     speak(target, voice, rate)
-                schedule(card, correct, today)
+                core.schedule(card, correct, today)
                 log_review(target, correct, today)
                 done += 1
                 correct_n += 1 if correct else 0
@@ -700,7 +562,7 @@ def main():
                     if sub == "t":
                         heard = listen()
                         if heard:
-                            res = score_pronunciation(sentence, heard)
+                            res = core.score_pronunciation(sentence, heard)
                             if res is None:
                                 print(f"  🎤 내 발음: {heard}")
                             else:
