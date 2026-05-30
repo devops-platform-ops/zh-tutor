@@ -30,11 +30,13 @@
 - **근거**: 테스트 용이(core는 I/O 없음), 멀티테넌트 강제(repo), 클라이언트 교체 자유(Phase 3 프론트). 
 
 ## ADR-005 — GitLab.dop primary + GitHub 공개 미러
-- **상태**: 채택 (2026-05-29)
+- **상태**: 채택 (2026-05-29), 인증 방식 보강 (2026-05-30)
 - **맥락**: 공개 OSS로 내되, 내부 Jenkins(jenkins.k8s.dop, Meshnet 뒤)는 GitHub.com 웹훅을 받을 수 없음.
 - **결정**: **gitlab.dop/solutions/zh-tutor = CI/CD primary**(기존 dop 파이프라인 재사용), **github.com/devops-platform-ops/zh-tutor = 공개 미러**(GitLab 서버측 push-mirror).
+- **인증 방식**: **HTTPS + GitHub fine-grained PAT**(Contents:Read+Write, 단일 repo 스코프, 만료 지정). PAT는 macOS 키체인(`GH_PAT_ZH_MIRROR`)에 보관 후 GitLab API로 미러 생성 시점에만 URL에 임베드(GitLab은 응답에 자동 마스킹).
+- **SSH 경로 폐기 사유**: SSH deploy key 방식은 (1) 조직 정책에서 deploy key 비활성 가능, (2) GitLab UI에 기존 미러의 `Detect host keys` 액션이 없고 API로도 SSH host key를 사후 주입할 수 없어 첫 등록 시 `Host key verification failed`가 나면 회복 불가. 한 번에 성공해야 하는 경로보다 PAT 갱신이 운영상 단순.
 - **근거**: agentic-devops가 이미 검증한 패턴. 웹훅 노출 회피, 신규 인프라 0. GitHub은 공개/백업/협업용.
-- **참고**: 기존 수동 이중클론+원격URL에 토큰 박는 방식은 지양 → 서버측 push-mirror(토큰 암호화 보관) 또는 SSH/credential helper.
+- **참고**: 기존 수동 이중클론+원격URL에 토큰 박는 방식은 지양 → 서버측 push-mirror(토큰 암호화 보관).
 
 ## ADR-006 — LLM/음성/발음 도구 선택
 - **상태**: 채택 (2026-05-29)

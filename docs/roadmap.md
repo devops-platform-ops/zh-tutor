@@ -7,7 +7,7 @@
 - [x] 문서: architecture / roadmap / decisions(ADR) / README / CLAUDE.md
 - [x] 스캐폴딩: pyproject / Makefile / .gitignore
 - [x] 기존 도구 이관: `cli.py` / `web.py`, repo 내부 venv, `zh`/`zhw` 콘솔 스크립트
-- [ ] gitlab.dop/solutions/zh-tutor 생성 + GitHub(devops-platform-ops/zh-tutor) push-mirror
+- [x] gitlab.dop/solutions/zh-tutor 생성 + GitHub(devops-platform-ops/zh-tutor) push-mirror (HTTPS+fine-grained PAT, 2026-05-30 동기화 검증)
 
 ## Phase 1 — 멀티테넌트 Dolt 기반 ✅ 완료
 - [x] Dolt sql-server + pymysql, 멀티테넌트 스키마(users/vocab/review_log)
