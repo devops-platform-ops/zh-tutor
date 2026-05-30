@@ -38,6 +38,12 @@ def save_vocab(user_id, vocab):
             " VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", rows)
 
 
+def delete_vocab(user_id, hanzi):
+    """단어장에서 hanzi 제거. 삭제된 행 수(0=없었음, 1=삭제됨)."""
+    return db.execute_rc(
+        "DELETE FROM vocab WHERE user_id=%s AND hanzi=%s", (user_id, hanzi))
+
+
 def log_review(user_id, hanzi, correct, day):
     db.execute(
         "INSERT INTO review_log (user_id,day,hanzi,correct) VALUES (%s,%s,%s,%s)",

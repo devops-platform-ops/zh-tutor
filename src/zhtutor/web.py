@@ -134,6 +134,15 @@ def add_word(word):
     return vocab_rows(), f"📒 {state}: {word} ({py}) — {ko}  [총 {len(v)}개]", ""
 
 
+def del_word(word):
+    word = (word or "").strip()
+    if not word:
+        return vocab_rows(), "단어를 입력하세요", ""
+    n = repo.delete_vocab(z.USER_ID, word)
+    msg = f"🗑 삭제: {word}" if n else f"(단어장에 없음: {word})"
+    return vocab_rows(), msg, ""
+
+
 # ---- 복습 탭 (SRS) ----
 def _rev_progress(st):
     return f"진행 {st['i'] + 1}/{len(st['queue'])}  (정답 {st['correct']}/{st['done']})"
@@ -320,10 +329,16 @@ def build():
                     add_txt = gr.Textbox(placeholder="추가할 중국어 (예: 你好)",
                                          scale=4, show_label=False)
                     add_btn = gr.Button("➕ 추가", scale=1, variant="primary")
+                with gr.Row():
+                    del_txt = gr.Textbox(placeholder="삭제할 중국어 (예: 你好)",
+                                         scale=4, show_label=False)
+                    del_btn = gr.Button("🗑 삭제", scale=1)
                 save_btn.click(save_last, [st_messages], [vocab_df, vocab_msg])
                 refresh_btn.click(lambda: vocab_rows(), None, [vocab_df])
                 add_btn.click(add_word, [add_txt], [vocab_df, vocab_msg, add_txt])
                 add_txt.submit(add_word, [add_txt], [vocab_df, vocab_msg, add_txt])
+                del_btn.click(del_word, [del_txt], [vocab_df, vocab_msg, del_txt])
+                del_txt.submit(del_word, [del_txt], [vocab_df, vocab_msg, del_txt])
 
             with gr.Tab("복습"):
                 st_rev = gr.State(_empty_rev())

@@ -106,6 +106,17 @@ def execute(sql, params=None):
         conn.close()
 
 
+def execute_rc(sql, params=None):
+    """execute → 영향받은 행 수 반환 (DELETE/UPDATE 결과 확인용)."""
+    conn = _connect(DB_NAME)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(sql, params or ())
+            return cur.rowcount
+    finally:
+        conn.close()
+
+
 def executemany(sql, seq):
     conn = _connect(DB_NAME)
     try:

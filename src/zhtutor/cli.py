@@ -315,6 +315,7 @@ HELP = """\
   /say [N]    마지막 중국어 다시 듣기 (N번째 문장만: /say 2)
   /save       직전 답변의 단어/문장을 단어장에 저장
   /add 你好   단어 직접 추가 (핀인 자동 + 뜻 조회)
+  /del 你好   단어장에서 단어 삭제
   /vocab      단어장 보기
   /review     오늘 복습 (SRS / 전체: /review all)
   /stats      학습 통계 (연속일·정확도·box·due)
@@ -507,6 +508,14 @@ def main():
             save_vocab(vocab)
             state = "추가" if is_new else "이미 있음(횟수+1)"
             print(f"  📒 {state}: {word} ({py}) — {ko}  [총 {len(vocab)}개]")
+            continue
+        if cmd == "/del":
+            word = user_in[len("/del"):].strip()
+            if not word:
+                print("(사용법: /del 你好)")
+                continue
+            n = repo.delete_vocab(USER_ID, word)
+            print(f"  🗑 삭제: {word}" if n else f"  (단어장에 없음: {word})")
             continue
         if cmd == "/vocab":
             vocab = load_vocab()
