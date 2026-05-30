@@ -44,4 +44,10 @@ make web       # 웹 UI (http://127.0.0.1:7860)
 
 ## 라이선스
 
-Apache License 2.0
+소스 코드: Apache License 2.0
+
+### 번들된 데이터 — `src/zhtutor/data/hsk{1,2}.json`
+
+HSK 2.0 Level 1·2 어휘 (간체 한자 + 핀인 + 영어 정의). 출처:
+[drkameleon/complete-hsk-vocabulary](https://github.com/drkameleon/complete-hsk-vocabulary) (MIT License).
+원본을 zh-tutor 스키마(`hanzi/pinyin/en`)로 변환하여 포함.

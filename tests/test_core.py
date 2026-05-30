@@ -188,6 +188,51 @@ def test_due_forecast_buckets():
                  "later": 1, "no_due": 1}
 
 
+def test_merge_hsk_adds_new_entries():
+    vocab = []
+    entries = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "en": "hello"},
+               {"hanzi": "谢谢", "pinyin": "xièxie", "en": "thanks"}]
+    n = core.merge_hsk(vocab, entries)
+    assert n == 2 and len(vocab) == 2
+    assert vocab[0]["ko"] == "hello"  # en이 ko 자리에 임시
+    assert vocab[0]["count"] == 1
+    assert "added" in vocab[0]
+
+
+def test_merge_hsk_skips_existing():
+    vocab = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "ko": "안녕"}]
+    entries = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "en": "hello"},
+               {"hanzi": "谢谢", "pinyin": "xièxie", "en": "thanks"}]
+    n = core.merge_hsk(vocab, entries)
+    assert n == 1  # 你好는 skip, 谢谢만 추가
+    assert len(vocab) == 2
+    assert vocab[0]["ko"] == "안녕"  # 기존 한국어 유지
+
+
+def test_merge_hsk_limit_clamp_and_slice():
+    vocab = []
+    entries = [{"hanzi": f"X{i}", "pinyin": "", "en": "x"} for i in range(10)]
+    assert core.merge_hsk(vocab, entries, limit=3) == 3
+    assert [e["hanzi"] for e in vocab] == ["X0", "X1", "X2"]
+    # limit=0/음수 → 1로 클램프
+    vocab2 = []
+    assert core.merge_hsk(vocab2, entries, limit=0) == 1
+    assert vocab2[0]["hanzi"] == "X0"
+
+
+def test_merge_hsk_empty_entries_and_blank_hanzi():
+    assert core.merge_hsk([], []) == 0
+    # hanzi 누락된 항목은 무시
+    assert core.merge_hsk([], [{"pinyin": "?", "en": "?"}]) == 0
+
+
+def test_merge_hsk_idempotent_on_re_import():
+    vocab = []
+    entries = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "en": "hello"}]
+    assert core.merge_hsk(vocab, entries) == 1
+    assert core.merge_hsk(vocab, entries) == 0  # 두 번째는 0
+
+
 def test_stats_handles_date_objects():
     # 방어 코드: repo가 정규화 안 했어도 datetime.date 들어오면 동작
     import datetime

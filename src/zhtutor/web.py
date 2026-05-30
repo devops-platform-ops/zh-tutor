@@ -143,6 +143,19 @@ def del_word(word):
     return vocab_rows(), msg, ""
 
 
+def import_hsk(level, n):
+    data = z._load_hsk(level)
+    if not data:
+        return vocab_rows(), f"알 수 없는 레벨: {level}"
+    limit = int(n) if n else None
+    v = z.load_vocab()
+    added = zc.merge_hsk(v, data["entries"], limit)
+    z.save_vocab(v)
+    return (vocab_rows(),
+            f"📥 {data['level']} — 새로 {added}개 추가 (총 {len(v)}개) · "
+            "뜻은 영어 임시값, 학습하며 한국어로 보강하세요")
+
+
 # ---- 복습 탭 (SRS) ----
 def _rev_progress(st):
     return f"진행 {st['i'] + 1}/{len(st['queue'])}  (정답 {st['correct']}/{st['done']})"
@@ -333,12 +346,20 @@ def build():
                     del_txt = gr.Textbox(placeholder="삭제할 중국어 (예: 你好)",
                                          scale=4, show_label=False)
                     del_btn = gr.Button("🗑 삭제", scale=1)
+                with gr.Row():
+                    imp_level = gr.Dropdown(["hsk1", "hsk2"], value="hsk1",
+                                            label="HSK 레벨", scale=1)
+                    imp_n = gr.Number(label="개수 (비우면 전체)",
+                                      precision=0, scale=1, value=None)
+                    imp_btn = gr.Button("📥 HSK 가져오기", scale=1)
                 save_btn.click(save_last, [st_messages], [vocab_df, vocab_msg])
                 refresh_btn.click(lambda: vocab_rows(), None, [vocab_df])
                 add_btn.click(add_word, [add_txt], [vocab_df, vocab_msg, add_txt])
                 add_txt.submit(add_word, [add_txt], [vocab_df, vocab_msg, add_txt])
                 del_btn.click(del_word, [del_txt], [vocab_df, vocab_msg, del_txt])
                 del_txt.submit(del_word, [del_txt], [vocab_df, vocab_msg, del_txt])
+                imp_btn.click(import_hsk, [imp_level, imp_n],
+                              [vocab_df, vocab_msg])
 
             with gr.Tab("복습"):
                 st_rev = gr.State(_empty_rev())

@@ -8,6 +8,7 @@
   실행: zh   (또는 python -m zhtutor.cli)
 """
 import argparse
+import importlib.resources
 import json
 import os
 import random
@@ -17,6 +18,17 @@ import urllib.error
 import urllib.request
 
 from . import core, db, repo
+
+HSK_FILES = {"hsk1": "hsk1.json", "hsk2": "hsk2.json"}
+
+
+def _load_hsk(level):
+    """패키지 data/ 에서 HSK 레벨 데이터 로드. 미지원 레벨이면 None."""
+    name = HSK_FILES.get((level or "").lower())
+    if not name:
+        return None
+    with importlib.resources.files("zhtutor.data").joinpath(name).open(encoding="utf-8") as f:
+        return json.load(f)
 
 API_URL = "https://api.deepseek.com/chat/completions"
 DEFAULT_RATE = 170   # say -r (입문자용 약간 느리게)
@@ -316,6 +328,7 @@ HELP = """\
   /save       직전 답변의 단어/문장을 단어장에 저장
   /add 你好   단어 직접 추가 (핀인 자동 + 뜻 조회)
   /del 你好   단어장에서 단어 삭제
+  /import hsk1 [N]  HSK 1·2급 일괄 가져오기 (N 생략=전체)
   /vocab      단어장 보기
   /review     오늘 복습 (SRS / 전체: /review all)
   /stats      학습 통계 (연속일·정확도·box·due)
@@ -516,6 +529,30 @@ def main():
                 continue
             n = repo.delete_vocab(USER_ID, word)
             print(f"  🗑 삭제: {word}" if n else f"  (단어장에 없음: {word})")
+            continue
+        if cmd == "/import":
+            rest = user_in[len("/import"):].strip().split()
+            if not rest:
+                print("(사용법: /import hsk1 [N]  · 가능: hsk1, hsk2)")
+                continue
+            level = rest[0]
+            limit = None
+            if len(rest) > 1:
+                try:
+                    limit = max(1, int(rest[1]))
+                except ValueError:
+                    print("(N은 숫자여야 합니다)")
+                    continue
+            data = _load_hsk(level)
+            if not data:
+                print(f"(알 수 없는 레벨: {level} — hsk1, hsk2 중 선택)")
+                continue
+            vocab = load_vocab()
+            added = core.merge_hsk(vocab, data["entries"], limit)
+            save_vocab(vocab)
+            print(f"  📥 {data['level']} 가져옴 — 새로 {added}개 추가"
+                  f"  (총 {len(vocab)}개)")
+            print(f"  ℹ️  뜻은 영어로 임시 채워졌어요 — 학습하며 /add 로 한국어 보강 가능")
             continue
         if cmd == "/vocab":
             vocab = load_vocab()

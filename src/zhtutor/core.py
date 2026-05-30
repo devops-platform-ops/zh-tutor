@@ -202,6 +202,31 @@ def box_distribution(vocab):
     return dist
 
 
+def merge_hsk(vocab, entries, limit=None):
+    """외부 HSK entries를 vocab에 병합. 이미 있는 hanzi는 skip.
+    limit None=전체, 그 외 앞에서부터 N개. 새로 추가된 수 반환."""
+    if limit is not None:
+        limit = max(1, int(limit))
+        entries = entries[:limit]
+    existing = {e.get("hanzi") for e in vocab}
+    today = datetime.date.today().isoformat()
+    added = 0
+    for src in entries:
+        h = src.get("hanzi")
+        if not h or h in existing:
+            continue
+        vocab.append({
+            "hanzi": h,
+            "pinyin": src.get("pinyin", ""),
+            "ko": src.get("en", "") or "(뜻 미확인)",  # 영어 뜻 임시 — 학습하며 보강
+            "added": today,
+            "count": 1,
+        })
+        existing.add(h)
+        added += 1
+    return added
+
+
 def due_forecast(vocab, today):
     """due 분포: today(이전 포함)/tomorrow/this_week(+2~+7)/later/no_due."""
     today = _iso(today)

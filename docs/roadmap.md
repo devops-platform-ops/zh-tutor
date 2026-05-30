@@ -34,8 +34,13 @@
   - Guardian: 배포 위험도 평가 → ArgoCD sync
   - Sentinel/Argus/Herald: CVE·알림·운영 알림
 
+## 추가 기능 (2026-05-30)
+- [x] 시작 자동 인사 → Enter 트리거(학습 준비 시간 확보)
+- [x] 단어장 편집·삭제 — CLI `/del 你好` + 웹 단어장 탭 🗑 버튼
+- [x] HSK 어휘 일괄 가져오기 — CLI `/import hsk1 [N]` + 웹 📥 (HSK1=150, HSK2=147, MIT 데이터: drkameleon/complete-hsk-vocabulary)
+- [ ] 복습-연동 회화(튜터가 오늘 due 단어를 대화에 녹임) — Pass B 예정
+
 ## 후보 / 미래
-- 복습-연동 회화(튜터가 오늘 due 단어를 대화에 녹임)
-- 단어장 편집·삭제, HSK 어휘 일괄 가져오기
 - Anki 내보내기(발음 mp3)
 - Dolt 원격(DoltHub) 백업·동기화, 모바일 접근
+- HSK 영어 임시 뜻 → 한국어 일괄 보강 명령(DeepSeek 배치)
