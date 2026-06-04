@@ -3,12 +3,19 @@
 > 새 세션 5분 컨텍스트 복원용. CLAUDE.md + roadmap.md + 이 파일 순으로 읽으면 현재 위치·다음 행보 잡힘.
 
 ## 한 줄 요약
-**Phase 0/1/2 모두 ✅**. CLI + Gradio 웹 양쪽 동작, 멀티테넌트 Dolt 기반, 학습 통계, 단어장 편집·HSK1·2 import·회화-학습 연동까지 모두 작동. pytest 34건 통과.
+**Phase 0/1/2 + Pass A 모두 ✅**. CLI + Gradio 웹 양쪽 동작, 멀티테넌트 Dolt 기반, 학습 통계, 단어장 편집·HSK1·2 import·회화-학습 연동 + **단어 뜻 캐시로 DeepSeek 단발 호출 제거**까지 작동. pytest 42건 통과.
 
 ## 마지막 commit + push
-- `e52fd8d feat: 회화-학습 연동 (오늘 due 단어를 회화 컨텍스트로 주입)`
+- `da1f3c9 feat(gloss): 단어 뜻 영구 캐시 + HSK 한국어 프리컴퓨트로 DeepSeek 단발 호출 제거`
 - gitlab.dop/solutions/zh-tutor (primary, project id=6) · github.com/devops-platform-ops/zh-tutor (HTTPS push-mirror id=2, fine-grained PAT in 키체인 `GH_PAT_ZH_MIRROR`)
-- 두 곳 모두 e52fd8d 도착 확인 (mirror id=2 첫 sync 성공 + 이후 5분 throttle 주의)
+- gitlab push 완료(`ae3c552..da1f3c9`), github 미러 자동 sync (5분 throttle 주의)
+
+## Pass A — DeepSeek 단발 호출 제거 (2026-06-04, `da1f3c9`)
+- **목적**: `complete()` 단발 호출(`/add` 단어 뜻 등)을 유한집합 프리컴퓨트 + 영구캐시로 사실상 0회.
+- **조회 체인**(`gloss.resolve_gloss`): ①영구캐시 `~/.local/share/zh-tutor/gloss_cache.json` → ②HSK 내장 사전(`data/hsk*.json` 의 `ko`) → ③DeepSeek(최후, 결과 캐시 store). HSK·기존 단어는 영구 0 호출.
+- **프리컴퓨트**: `make hsk-gloss`(=`scripts/build_hsk_gloss.py`, deepseek-v4-pro·thinking disabled·배치30·멱등·`--force`). HSK1/2 **297단어 ko 적재 완료**. 인명·음역 오역(比/本/白/吧)은 보강 프롬프트(핀인+기초뜻 우선)로 교정.
+- **변경**: `gloss.py`(신규) · `core.merge_hsk` ko우선 · `cli /add`·`web add_word` resolve_gloss 라우팅 · `data/hsk{1,2}.json` ko · tests +8(gloss 7, merge 1).
+- 회화(`stream_chat`)는 이번 범위 밖 → 로컬LLM 오프라인화는 Pass B 후보.
 
 ## 진행 현황
 
@@ -22,6 +29,7 @@
 | Pass C — 단어장 편집·삭제 | ✅ | `/del 你好` + 웹 🗑 버튼, `repo.delete_vocab`, `db.execute_rc` |
 | Pass D — HSK 일괄 import | ✅ | `data/hsk{1,2}.json` (150+147=297, MIT), `/import hsk1 [N]` + 웹 📥, ko에 영어 임시값 |
 | Pass B — 회화-학습 연동 | ✅ | `core.format_due_context` → system 메시지 주입, 첫 Enter/`/new` 시점 |
+| Pass A — DeepSeek 단발 호출 제거 | ✅ | `gloss.py` 캐시체인 + `make hsk-gloss` 프리컴퓨트(297단어 ko), `/add` 0호출, pytest +8=42 |
 
 ## 핵심 파일
 
@@ -32,8 +40,9 @@
 | 데이터 접근 (user_id 키) | `src/zhtutor/repo.py` (get/save/log/delete/get_review_log) |
 | CLI | `src/zhtutor/cli.py` |
 | 웹 (Gradio 3탭+통계) | `src/zhtutor/web.py` |
-| HSK 데이터 | `src/zhtutor/data/hsk{1,2}.json` |
-| 테스트 | `tests/test_core.py` (34건) |
+| HSK 데이터 | `src/zhtutor/data/hsk{1,2}.json` (ko 적재 완료) |
+| 단어 뜻 캐시 | `src/zhtutor/gloss.py` + `scripts/build_hsk_gloss.py` (`make hsk-gloss`) |
+| 테스트 | `tests/test_core.py`(35) + `tests/test_gloss.py`(7) = 42건 |
 | 문서 | `docs/{architecture,roadmap,decisions}.md` |
 
 ## 다음 행보 후보
@@ -58,6 +67,7 @@
 ## 미해결 / 후속
 
 - [ ] `core.py` 분리 이후 cli.py에 LLM/audio가 같이 있어 580줄 — 후속에 `llm.py`/`audio.py` 분리 고려 (Phase 1 잔여로 잡혔다가 제외, 멀티테넌트엔 영향 X)
-- [ ] HSK 영어 임시 뜻을 한국어로 일괄 보강 명령 (위 다음 후보 #2)
+- [x] HSK 영어 임시 뜻 → 한국어 일괄 보강 (Pass A `make hsk-gloss` 로 완료, 297단어 ko)
+- [ ] **Pass B 후보** — 회화(`stream_chat`) 오프라인화: msu Ollama+Qwen2.5 로컬LLM, `API_URL` base_url 전환식 추상화 (DeepSeek ↔ 로컬)
 - [ ] 학습 통계 시각화 — 현재는 표만, 차트(Gradio BarPlot) 도입 검토
 - [ ] 실 사용자 베타 — 단일 유저 검증 후 Phase 3 인증/배포 시작

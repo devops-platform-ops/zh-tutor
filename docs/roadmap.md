@@ -40,7 +40,16 @@
 - [x] HSK 어휘 일괄 가져오기 — CLI `/import hsk1 [N]` + 웹 📥 (HSK1=150, HSK2=147, MIT 데이터: drkameleon/complete-hsk-vocabulary)
 - [x] 복습-연동 회화 — 회화 시작 시 오늘 due 단어 N개를 system 컨텍스트로 주입(`core.format_due_context`), CLI 첫 Enter/`/new` 와 웹 `_new_messages` 동시 적용 (2026-05-30)
 
+## Pass A — DeepSeek 단발 호출 제거 ✅ 완료 (2026-06-04)
+- [x] `gloss.py` — 단어 뜻 영구 캐시(`~/.local/share/zh-tutor/gloss_cache.json`) + HSK 내장 사전.
+      조회 우선순위 ①캐시 → ②HSK ko → ③DeepSeek(최후). HSK·기존 단어 영구 0 호출.
+- [x] `scripts/build_hsk_gloss.py` + `make hsk-gloss` — HSK ko 1회성 프리컴퓨트
+      (deepseek-v4-pro, thinking disabled, 배치30, 멱등, `--force`). HSK1/2 297단어 적재 완료.
+- [x] `core.merge_hsk` ko 우선 · cli `/add`·web `add_word` resolve_gloss 라우팅
+- [x] tests: gloss 7건 + merge_hsk ko우선 1건 (42 passed). 커밋 `da1f3c9`
+- 후속 후보: 회화(stream_chat) 로컬LLM(msu Ollama+Qwen2.5)로 오프라인화 = Pass B
+
 ## 후보 / 미래
 - Anki 내보내기(발음 mp3)
 - Dolt 원격(DoltHub) 백업·동기화, 모바일 접근
-- HSK 영어 임시 뜻 → 한국어 일괄 보강 명령(DeepSeek 배치)
+- HSK3~6 데이터 추가 → `make hsk-gloss` 재실행(멱등, 누락분만)
