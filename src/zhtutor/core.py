@@ -218,7 +218,8 @@ def merge_hsk(vocab, entries, limit=None):
         vocab.append({
             "hanzi": h,
             "pinyin": src.get("pinyin", ""),
-            "ko": src.get("en", "") or "(뜻 미확인)",  # 영어 뜻 임시 — 학습하며 보강
+            # ko(프리컴퓨트된 한국어) 우선, 없으면 en 임시값
+            "ko": src.get("ko") or src.get("en") or "(뜻 미확인)",
             "added": today,
             "count": 1,
         })

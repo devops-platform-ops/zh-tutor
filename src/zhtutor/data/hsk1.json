@@ -6,752 +6,902 @@
     {
       "hanzi": "爱",
       "pinyin": "ài",
-      "en": "to love; to be fond of; to like; affection"
+      "en": "to love; to be fond of; to like; affection",
+      "ko": "사랑하다"
     },
     {
       "hanzi": "八",
       "pinyin": "bā",
-      "en": "eight; 8"
+      "en": "eight; 8",
+      "ko": "8"
     },
     {
       "hanzi": "爸爸",
       "pinyin": "bà ba",
-      "en": "(coll.) father; dad"
+      "en": "(coll.) father; dad",
+      "ko": "아빠"
     },
     {
       "hanzi": "杯子",
       "pinyin": "bēi zi",
-      "en": "cup; glass"
+      "en": "cup; glass",
+      "ko": "컵"
     },
     {
       "hanzi": "北京",
       "pinyin": "Běi jīng",
-      "en": "Beijing, capital of the People's Republic of China"
+      "en": "Beijing, capital of the People's Republic of China",
+      "ko": "베이징"
     },
     {
       "hanzi": "本",
       "pinyin": "běn",
-      "en": "root; stem"
+      "en": "root; stem",
+      "ko": "근본"
     },
     {
       "hanzi": "不",
       "pinyin": "bù",
-      "en": "no; not so; (bound form) not; un-"
+      "en": "no; not so; (bound form) not; un-",
+      "ko": "아니다"
     },
     {
       "hanzi": "不客气",
       "pinyin": "bù kè qi",
-      "en": "you're welcome; don't mention it"
+      "en": "you're welcome; don't mention it",
+      "ko": "천만에요"
     },
     {
       "hanzi": "菜",
       "pinyin": "cài",
-      "en": "dish (type of food); vegetable"
+      "en": "dish (type of food); vegetable",
+      "ko": "요리"
     },
     {
       "hanzi": "茶",
       "pinyin": "chá",
-      "en": "tea; tea plant"
+      "en": "tea; tea plant",
+      "ko": "차"
     },
     {
       "hanzi": "吃",
       "pinyin": "chī",
-      "en": "to eat; to consume; to eat at (a cafeteria etc)"
+      "en": "to eat; to consume; to eat at (a cafeteria etc)",
+      "ko": "먹다"
     },
     {
       "hanzi": "出租车",
       "pinyin": "chū zū chē",
-      "en": "taxi; (Tw) rental car"
+      "en": "taxi; (Tw) rental car",
+      "ko": "택시"
     },
     {
       "hanzi": "打电话",
       "pinyin": "dǎ diàn huà",
-      "en": "to make a telephone call"
+      "en": "to make a telephone call",
+      "ko": "전화하다"
     },
     {
       "hanzi": "大",
       "pinyin": "dà",
-      "en": "big; large; great; older (than another person)"
+      "en": "big; large; great; older (than another person)",
+      "ko": "크다"
     },
     {
       "hanzi": "的",
       "pinyin": "de",
-      "en": "of; ~'s (possessive particle); (used after an attribute)"
+      "en": "of; ~'s (possessive particle); (used after an attribute)",
+      "ko": "~의"
     },
     {
       "hanzi": "点",
       "pinyin": "diǎn",
-      "en": "point; dot"
+      "en": "point; dot",
+      "ko": "점"
     },
     {
       "hanzi": "电脑",
       "pinyin": "diàn nǎo",
-      "en": "computer"
+      "en": "computer",
+      "ko": "컴퓨터"
     },
     {
       "hanzi": "电视",
       "pinyin": "diàn shì",
-      "en": "television; TV"
+      "en": "television; TV",
+      "ko": "텔레비전"
     },
     {
       "hanzi": "电影",
       "pinyin": "diàn yǐng",
-      "en": "movie; film"
+      "en": "movie; film",
+      "ko": "영화"
     },
     {
       "hanzi": "东西",
       "pinyin": "dōng xī",
-      "en": "east and west"
+      "en": "east and west",
+      "ko": "물건"
     },
     {
       "hanzi": "都",
       "pinyin": "Dū",
-      "en": "surname Du"
+      "en": "surname Du",
+      "ko": "모두"
     },
     {
       "hanzi": "读",
       "pinyin": "dòu",
-      "en": "comma; phrase marked by pause"
+      "en": "comma; phrase marked by pause",
+      "ko": "읽다"
     },
     {
       "hanzi": "对不起",
       "pinyin": "duì bu qǐ",
-      "en": "I'm sorry; excuse me; I beg your pardon; to let (sb) down; to disappoint"
+      "en": "I'm sorry; excuse me; I beg your pardon; to let (sb) down; to disappoint",
+      "ko": "미안합니다"
     },
     {
       "hanzi": "多",
       "pinyin": "duō",
-      "en": "many; much; too many; in excess"
+      "en": "many; much; too many; in excess",
+      "ko": "많다"
     },
     {
       "hanzi": "多少",
       "pinyin": "duō shǎo",
-      "en": "number; amount"
+      "en": "number; amount",
+      "ko": "얼마"
     },
     {
       "hanzi": "儿子",
       "pinyin": "ér zi",
-      "en": "son"
+      "en": "son",
+      "ko": "아들"
     },
     {
       "hanzi": "二",
       "pinyin": "èr",
-      "en": "two; 2"
+      "en": "two; 2",
+      "ko": "2"
     },
     {
       "hanzi": "饭馆",
       "pinyin": "fàn guǎn",
-      "en": "restaurant"
+      "en": "restaurant",
+      "ko": "식당"
     },
     {
       "hanzi": "飞机",
       "pinyin": "fēi jī",
-      "en": "airplane"
+      "en": "airplane",
+      "ko": "비행기"
     },
     {
       "hanzi": "分钟",
       "pinyin": "fēn zhōng",
-      "en": "minute"
+      "en": "minute",
+      "ko": "분"
     },
     {
       "hanzi": "高兴",
       "pinyin": "gāo xìng",
-      "en": "happy; glad"
+      "en": "happy; glad",
+      "ko": "기쁘다"
     },
     {
       "hanzi": "个",
       "pinyin": "gě",
-      "en": "used in 自个儿"
+      "en": "used in 自个儿",
+      "ko": "개 (양사)"
     },
     {
       "hanzi": "工作",
       "pinyin": "gōng zuò",
-      "en": "to work; (of a machine) to operate"
+      "en": "to work; (of a machine) to operate",
+      "ko": "일하다"
     },
     {
       "hanzi": "狗",
       "pinyin": "gǒu",
-      "en": "dog"
+      "en": "dog",
+      "ko": "개"
     },
     {
       "hanzi": "汉语",
       "pinyin": "Hàn yǔ",
-      "en": "Chinese language"
+      "en": "Chinese language",
+      "ko": "중국어"
     },
     {
       "hanzi": "好",
       "pinyin": "hǎo",
-      "en": "good; appropriate; proper"
+      "en": "good; appropriate; proper",
+      "ko": "좋다"
     },
     {
       "hanzi": "喝",
       "pinyin": "hē",
-      "en": "to drink; variant of 嗬"
+      "en": "to drink; variant of 嗬",
+      "ko": "마시다"
     },
     {
       "hanzi": "和",
       "pinyin": "hé",
-      "en": "old variant of 和"
+      "en": "old variant of 和",
+      "ko": "~와/과"
     },
     {
       "hanzi": "很",
       "pinyin": "hěn",
-      "en": "(adverb of degree); quite"
+      "en": "(adverb of degree); quite",
+      "ko": "매우"
     },
     {
       "hanzi": "后面",
       "pinyin": "hòu mian",
-      "en": "the back; the rear; the last bit; behind; near the end; at the back"
+      "en": "the back; the rear; the last bit; behind; near the end; at the back",
+      "ko": "뒤"
     },
     {
       "hanzi": "回",
       "pinyin": "huí",
-      "en": "to circle; to go back"
+      "en": "to circle; to go back",
+      "ko": "돌아가다"
     },
     {
       "hanzi": "会",
       "pinyin": "huì",
-      "en": "can; to have the skill; to know how to; to be likely to; to be sure to"
+      "en": "can; to have the skill; to know how to; to be likely to; to be sure to",
+      "ko": "할 수 있다"
     },
     {
       "hanzi": "火车站",
       "pinyin": "huǒ chē zhàn",
-      "en": "train station"
+      "en": "train station",
+      "ko": "기차역"
     },
     {
       "hanzi": "几",
       "pinyin": "jī",
-      "en": "small table"
+      "en": "small table",
+      "ko": "몇"
     },
     {
       "hanzi": "家",
       "pinyin": "jiā",
-      "en": "used in 家伙 and 家俱"
+      "en": "used in 家伙 and 家俱",
+      "ko": "집"
     },
     {
       "hanzi": "叫",
       "pinyin": "jiào",
-      "en": "to shout; to call"
+      "en": "to shout; to call",
+      "ko": "부르다"
     },
     {
       "hanzi": "今天",
       "pinyin": "jīn tiān",
-      "en": "today; at the present"
+      "en": "today; at the present",
+      "ko": "오늘"
     },
     {
       "hanzi": "九",
       "pinyin": "jiǔ",
-      "en": "nine; 9"
+      "en": "nine; 9",
+      "ko": "9"
     },
     {
       "hanzi": "开",
       "pinyin": "kāi",
-      "en": "to open (transitive or intransitive); (of ships, vehicles, troops etc) to start"
+      "en": "to open (transitive or intransitive); (of ships, vehicles, troops etc) to start",
+      "ko": "열다"
     },
     {
       "hanzi": "看",
       "pinyin": "kān",
-      "en": "to look after; to take care of"
+      "en": "to look after; to take care of",
+      "ko": "돌보다"
     },
     {
       "hanzi": "看见",
       "pinyin": "kàn jiàn",
-      "en": "to see; to catch sight of"
+      "en": "to see; to catch sight of",
+      "ko": "보다"
     },
     {
       "hanzi": "块",
       "pinyin": "kuài",
-      "en": "lump; chunk; piece; classifier for pieces of cloth, cake, soap etc"
+      "en": "lump; chunk; piece; classifier for pieces of cloth, cake, soap etc",
+      "ko": "조각"
     },
     {
       "hanzi": "来",
       "pinyin": "lái",
-      "en": "to come; (used as a substitute for a more specific verb)"
+      "en": "to come; (used as a substitute for a more specific verb)",
+      "ko": "오다"
     },
     {
       "hanzi": "老师",
       "pinyin": "lǎo shī",
-      "en": "teacher"
+      "en": "teacher",
+      "ko": "선생님"
     },
     {
       "hanzi": "了",
       "pinyin": "le",
-      "en": "(completed action marker); (modal particle indicating change of state, situation now)"
+      "en": "(completed action marker); (modal particle indicating change of state, situation now)",
+      "ko": "~했다 (완료)"
     },
     {
       "hanzi": "冷",
       "pinyin": "Lěng",
-      "en": "surname Leng"
+      "en": "surname Leng",
+      "ko": "춥다"
     },
     {
       "hanzi": "里",
       "pinyin": "lǐ",
-      "en": "variant of 里"
+      "en": "variant of 里",
+      "ko": "안"
     },
     {
       "hanzi": "零",
       "pinyin": "líng",
-      "en": "zero; nought"
+      "en": "zero; nought",
+      "ko": "0"
     },
     {
       "hanzi": "六",
       "pinyin": "liù",
-      "en": "six; 6"
+      "en": "six; 6",
+      "ko": "6"
     },
     {
       "hanzi": "妈妈",
       "pinyin": "mā ma",
-      "en": "mama; mommy"
+      "en": "mama; mommy",
+      "ko": "엄마"
     },
     {
       "hanzi": "吗",
       "pinyin": "má",
-      "en": "(coll.) what?"
+      "en": "(coll.) what?",
+      "ko": "무엇"
     },
     {
       "hanzi": "买",
       "pinyin": "mǎi",
-      "en": "to buy; to purchase"
+      "en": "to buy; to purchase",
+      "ko": "사다"
     },
     {
       "hanzi": "猫",
       "pinyin": "māo",
-      "en": "cat; (dialect) to hide oneself"
+      "en": "cat; (dialect) to hide oneself",
+      "ko": "고양이"
     },
     {
       "hanzi": "没",
       "pinyin": "méi",
-      "en": "(negative prefix for verbs) have not; not"
+      "en": "(negative prefix for verbs) have not; not",
+      "ko": "~하지 않다"
     },
     {
       "hanzi": "没关系",
       "pinyin": "méi guān xi",
-      "en": "it doesn't matter"
+      "en": "it doesn't matter",
+      "ko": "괜찮다"
     },
     {
       "hanzi": "米饭",
       "pinyin": "mǐ fàn",
-      "en": "(cooked) rice"
+      "en": "(cooked) rice",
+      "ko": "쌀밥"
     },
     {
       "hanzi": "名字",
       "pinyin": "míng zi",
-      "en": "name (of a person or thing)"
+      "en": "name (of a person or thing)",
+      "ko": "이름"
     },
     {
       "hanzi": "明天",
       "pinyin": "míng tiān",
-      "en": "tomorrow"
+      "en": "tomorrow",
+      "ko": "내일"
     },
     {
       "hanzi": "哪",
       "pinyin": "nǎ",
-      "en": "how; which"
+      "en": "how; which",
+      "ko": "어느"
     },
     {
       "hanzi": "那",
       "pinyin": "Nā",
-      "en": "surname Na"
+      "en": "surname Na",
+      "ko": "저"
     },
     {
       "hanzi": "呢",
       "pinyin": "ne",
-      "en": "particle indicating that a previously asked question is to be applied to the preceding word (\"What about ...?\", \"And ...?\"); particle for inquiring about location (\"Where is ...?\")"
+      "en": "particle indicating that a previously asked question is to be applied to the preceding word (\"What about ...?\", \"And ...?\"); particle for inquiring about location (\"Where is ...?\")",
+      "ko": "~는요?"
     },
     {
       "hanzi": "能",
       "pinyin": "Néng",
-      "en": "surname Neng"
+      "en": "surname Neng",
+      "ko": "~할 수 있다"
     },
     {
       "hanzi": "你",
       "pinyin": "nǐ",
-      "en": "you (informal, as opposed to courteous 您)"
+      "en": "you (informal, as opposed to courteous 您)",
+      "ko": "너"
     },
     {
       "hanzi": "年",
       "pinyin": "Nián",
-      "en": "surname Nian"
+      "en": "surname Nian",
+      "ko": "해"
     },
     {
       "hanzi": "女儿",
       "pinyin": "nǚ ér",
-      "en": "daughter"
+      "en": "daughter",
+      "ko": "딸"
     },
     {
       "hanzi": "朋友",
       "pinyin": "péng you",
-      "en": "friend"
+      "en": "friend",
+      "ko": "친구"
     },
     {
       "hanzi": "漂亮",
       "pinyin": "piào liang",
-      "en": "pretty; beautiful"
+      "en": "pretty; beautiful",
+      "ko": "예쁘다"
     },
     {
       "hanzi": "苹果",
       "pinyin": "píng guǒ",
-      "en": "apple"
+      "en": "apple",
+      "ko": "사과"
     },
     {
       "hanzi": "七",
       "pinyin": "qī",
-      "en": "seven; 7"
+      "en": "seven; 7",
+      "ko": "7"
     },
     {
       "hanzi": "前面",
       "pinyin": "qián miàn",
-      "en": "ahead; in front"
+      "en": "ahead; in front",
+      "ko": "앞"
     },
     {
       "hanzi": "钱",
       "pinyin": "Qián",
-      "en": "surname Qian"
+      "en": "surname Qian",
+      "ko": "돈"
     },
     {
       "hanzi": "请",
       "pinyin": "qǐng",
-      "en": "to ask; to invite"
+      "en": "to ask; to invite",
+      "ko": "부탁하다"
     },
     {
       "hanzi": "去",
       "pinyin": "qù",
-      "en": "to go; to go to (a place)"
+      "en": "to go; to go to (a place)",
+      "ko": "가다"
     },
     {
       "hanzi": "热",
       "pinyin": "rè",
-      "en": "to warm up; to heat up"
+      "en": "to warm up; to heat up",
+      "ko": "덥다"
     },
     {
       "hanzi": "人",
       "pinyin": "rén",
-      "en": "person; people"
+      "en": "person; people",
+      "ko": "사람"
     },
     {
       "hanzi": "认识",
       "pinyin": "rèn shi",
-      "en": "to know; to recognize"
+      "en": "to know; to recognize",
+      "ko": "알다"
     },
     {
       "hanzi": "日",
       "pinyin": "Rì",
-      "en": "abbr. for 本, Japan"
+      "en": "abbr. for 本, Japan",
+      "ko": "날"
     },
     {
       "hanzi": "三",
       "pinyin": "Sān",
-      "en": "surname San"
+      "en": "surname San",
+      "ko": "3"
     },
     {
       "hanzi": "商店",
       "pinyin": "shāng diàn",
-      "en": "store; shop"
+      "en": "store; shop",
+      "ko": "가게"
     },
     {
       "hanzi": "上",
       "pinyin": "shǎng",
-      "en": "used in 上声"
+      "en": "used in 上声",
+      "ko": "위"
     },
     {
       "hanzi": "上午",
       "pinyin": "shàng wǔ",
-      "en": "morning"
+      "en": "morning",
+      "ko": "오전"
     },
     {
       "hanzi": "少",
       "pinyin": "shǎo",
-      "en": "few; less"
+      "en": "few; less",
+      "ko": "적다"
     },
     {
       "hanzi": "什么",
       "pinyin": "shén me",
-      "en": "what?; something"
+      "en": "what?; something",
+      "ko": "무엇"
     },
     {
       "hanzi": "十",
       "pinyin": "shí",
-      "en": "ten; 10"
+      "en": "ten; 10",
+      "ko": "10"
     },
     {
       "hanzi": "时候",
       "pinyin": "shí hou",
-      "en": "time; length of time"
+      "en": "time; length of time",
+      "ko": "시간"
     },
     {
       "hanzi": "是",
       "pinyin": "shì",
-      "en": "to be (followed by substantives only); correct; right; true"
+      "en": "to be (followed by substantives only); correct; right; true",
+      "ko": "~이다"
     },
     {
       "hanzi": "书",
       "pinyin": "Shū",
-      "en": "abbr. for 书经"
+      "en": "abbr. for 书经",
+      "ko": "책"
     },
     {
       "hanzi": "谁",
       "pinyin": "shéi",
-      "en": "who; also pr. [shuí]"
+      "en": "who; also pr. [shuí]",
+      "ko": "누구"
     },
     {
       "hanzi": "水",
       "pinyin": "Shuǐ",
-      "en": "surname Shui"
+      "en": "surname Shui",
+      "ko": "물"
     },
     {
       "hanzi": "水果",
       "pinyin": "shuǐ guǒ",
-      "en": "fruit"
+      "en": "fruit",
+      "ko": "과일"
     },
     {
       "hanzi": "睡觉",
       "pinyin": "shuì jiào",
-      "en": "to go to bed; to sleep"
+      "en": "to go to bed; to sleep",
+      "ko": "잠자다"
     },
     {
       "hanzi": "说话",
       "pinyin": "shuō huà",
-      "en": "to speak; to say"
+      "en": "to speak; to say",
+      "ko": "말하다"
     },
     {
       "hanzi": "四",
       "pinyin": "sì",
-      "en": "four; 4"
+      "en": "four; 4",
+      "ko": "4"
     },
     {
       "hanzi": "岁",
       "pinyin": "suì",
-      "en": "variant of 岁, year; years old"
+      "en": "variant of 岁, year; years old",
+      "ko": "살, 나이"
     },
     {
       "hanzi": "他",
       "pinyin": "tā",
-      "en": "he; him (used for either sex when the sex is unknown or unimportant); (used before sb's name for emphasis)"
+      "en": "he; him (used for either sex when the sex is unknown or unimportant); (used before sb's name for emphasis)",
+      "ko": "그"
     },
     {
       "hanzi": "她",
       "pinyin": "tā",
-      "en": "she"
+      "en": "she",
+      "ko": "그녀"
     },
     {
       "hanzi": "太",
       "pinyin": "tài",
-      "en": "highest; greatest"
+      "en": "highest; greatest",
+      "ko": "너무"
     },
     {
       "hanzi": "天气",
       "pinyin": "tiān qì",
-      "en": "weather"
+      "en": "weather",
+      "ko": "날씨"
     },
     {
       "hanzi": "听",
       "pinyin": "yǐn",
-      "en": "smile (archaic)"
+      "en": "smile (archaic)",
+      "ko": "듣다"
     },
     {
       "hanzi": "同学",
       "pinyin": "tóng xué",
-      "en": "to study at the same school; fellow student"
+      "en": "to study at the same school; fellow student",
+      "ko": "동창, 학우"
     },
     {
       "hanzi": "喂",
       "pinyin": "wéi",
-      "en": "hello (when answering the phone)"
+      "en": "hello (when answering the phone)",
+      "ko": "여보세요"
     },
     {
       "hanzi": "我",
       "pinyin": "wǒ",
-      "en": "I; me; my"
+      "en": "I; me; my",
+      "ko": "나"
     },
     {
       "hanzi": "我们",
       "pinyin": "wǒ men",
-      "en": "we; us"
+      "en": "we; us",
+      "ko": "우리"
     },
     {
       "hanzi": "五",
       "pinyin": "wǔ",
-      "en": "five; 5"
+      "en": "five; 5",
+      "ko": "5"
     },
     {
       "hanzi": "喜欢",
       "pinyin": "xǐ huan",
-      "en": "to like; to be fond of"
+      "en": "to like; to be fond of",
+      "ko": "좋아하다"
     },
     {
       "hanzi": "下",
       "pinyin": "xià",
-      "en": "down; downwards"
+      "en": "down; downwards",
+      "ko": "아래"
     },
     {
       "hanzi": "下午",
       "pinyin": "xià wǔ",
-      "en": "afternoon; p.m."
+      "en": "afternoon; p.m.",
+      "ko": "오후"
     },
     {
       "hanzi": "下雨",
       "pinyin": "xià yǔ",
-      "en": "to rain"
+      "en": "to rain",
+      "ko": "비가 오다"
     },
     {
       "hanzi": "先生",
       "pinyin": "xiān sheng",
-      "en": "teacher; gentleman; sir; mister (Mr.)"
+      "en": "teacher; gentleman; sir; mister (Mr.)",
+      "ko": "선생님, ~씨"
     },
     {
       "hanzi": "现在",
       "pinyin": "xiàn zài",
-      "en": "now; at present"
+      "en": "now; at present",
+      "ko": "지금"
     },
     {
       "hanzi": "想",
       "pinyin": "xiǎng",
-      "en": "to think (about); to think of; to devise"
+      "en": "to think (about); to think of; to devise",
+      "ko": "~하고 싶다, 생각하다"
     },
     {
       "hanzi": "小",
       "pinyin": "xiǎo",
-      "en": "small; tiny"
+      "en": "small; tiny",
+      "ko": "작다"
     },
     {
       "hanzi": "小姐",
       "pinyin": "xiǎo jie",
-      "en": "young lady; miss"
+      "en": "young lady; miss",
+      "ko": "아가씨"
     },
     {
       "hanzi": "些",
       "pinyin": "xiē",
-      "en": "classifier indicating a small amount or small number greater than 1: some, a few, several"
+      "en": "classifier indicating a small amount or small number greater than 1: some, a few, several",
+      "ko": "조금, 몇몇"
     },
     {
       "hanzi": "写",
       "pinyin": "xiě",
-      "en": "to write"
+      "en": "to write",
+      "ko": "쓰다"
     },
     {
       "hanzi": "谢谢",
       "pinyin": "xiè xie",
-      "en": "to thank; thanks"
+      "en": "to thank; thanks",
+      "ko": "감사합니다"
     },
     {
       "hanzi": "星期",
       "pinyin": "xīng qī",
-      "en": "week; day of the week"
+      "en": "week; day of the week",
+      "ko": "주, 요일"
     },
     {
       "hanzi": "学生",
       "pinyin": "xué sheng",
-      "en": "student; schoolchild"
+      "en": "student; schoolchild",
+      "ko": "학생"
     },
     {
       "hanzi": "学习",
       "pinyin": "xué xí",
-      "en": "to learn; to study"
+      "en": "to learn; to study",
+      "ko": "공부하다, 배우다"
     },
     {
       "hanzi": "学校",
       "pinyin": "xué xiào",
-      "en": "school"
+      "en": "school",
+      "ko": "학교"
     },
     {
       "hanzi": "一",
       "pinyin": "yī",
-      "en": "one; single"
+      "en": "one; single",
+      "ko": "하나, 일"
     },
     {
       "hanzi": "衣服",
       "pinyin": "yī fu",
-      "en": "clothes"
+      "en": "clothes",
+      "ko": "옷"
     },
     {
       "hanzi": "医生",
       "pinyin": "yī shēng",
-      "en": "doctor"
+      "en": "doctor",
+      "ko": "의사"
     },
     {
       "hanzi": "医院",
       "pinyin": "yī yuàn",
-      "en": "hospital"
+      "en": "hospital",
+      "ko": "병원"
     },
     {
       "hanzi": "椅子",
       "pinyin": "yǐ zi",
-      "en": "chair"
+      "en": "chair",
+      "ko": "의자"
     },
     {
       "hanzi": "有",
       "pinyin": "yǒu",
-      "en": "to have; there is; (bound form) having; with; -ful; -ed; -al (as in 意 intentional)"
+      "en": "to have; there is; (bound form) having; with; -ful; -ed; -al (as in 意 intentional)",
+      "ko": "있다, 가지다"
     },
     {
       "hanzi": "月",
       "pinyin": "yuè",
-      "en": "moon; month"
+      "en": "moon; month",
+      "ko": "달, 월"
     },
     {
       "hanzi": "再见",
       "pinyin": "zài jiàn",
-      "en": "goodbye; see you again later"
+      "en": "goodbye; see you again later",
+      "ko": "안녕히 가세요, 다시 만나요"
     },
     {
       "hanzi": "在",
       "pinyin": "zài",
-      "en": "to exist; to be alive; (of sb or sth) to be (located) at"
+      "en": "to exist; to be alive; (of sb or sth) to be (located) at",
+      "ko": "~에 있다, ~에"
     },
     {
       "hanzi": "怎么",
       "pinyin": "zěn me",
-      "en": "how?; what?"
+      "en": "how?; what?",
+      "ko": "어떻게"
     },
     {
       "hanzi": "怎么样",
       "pinyin": "zěn me yàng",
-      "en": "how?; how about?"
+      "en": "how?; how about?",
+      "ko": "어떻습니까"
     },
     {
       "hanzi": "这",
       "pinyin": "zhè",
-      "en": "(pronoun) this; these; (bound form) this; the (followed by a noun)"
+      "en": "(pronoun) this; these; (bound form) this; the (followed by a noun)",
+      "ko": "이, 이것"
     },
     {
       "hanzi": "中国",
       "pinyin": "Zhōng guó",
-      "en": "China"
+      "en": "China",
+      "ko": "중국"
     },
     {
       "hanzi": "中午",
       "pinyin": "zhōng wǔ",
-      "en": "noon; midday"
+      "en": "noon; midday",
+      "ko": "정오"
     },
     {
       "hanzi": "住",
       "pinyin": "zhù",
-      "en": "to live; to dwell"
+      "en": "to live; to dwell",
+      "ko": "살다, 숙박하다"
     },
     {
       "hanzi": "桌子",
       "pinyin": "zhuō zi",
-      "en": "table; desk"
+      "en": "table; desk",
+      "ko": "책상, 탁자"
     },
     {
       "hanzi": "字",
       "pinyin": "zì",
-      "en": "letter; symbol"
+      "en": "letter; symbol",
+      "ko": "글자"
     },
     {
       "hanzi": "昨天",
       "pinyin": "zuó tiān",
-      "en": "yesterday"
+      "en": "yesterday",
+      "ko": "어제"
     },
     {
       "hanzi": "坐",
       "pinyin": "Zuò",
-      "en": "surname Zuo"
+      "en": "surname Zuo",
+      "ko": "앉다"
     },
     {
       "hanzi": "做",
       "pinyin": "zuò",
-      "en": "to make; to produce; to write; to compose"
+      "en": "to make; to produce; to write; to compose",
+      "ko": "만들다, 하다"
     }
   ]
 }

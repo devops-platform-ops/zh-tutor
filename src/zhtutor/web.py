@@ -14,6 +14,7 @@ import gradio as gr  # noqa: E402
 
 from zhtutor import cli as z  # noqa: E402
 from zhtutor import core as zc  # noqa: E402
+from zhtutor import gloss  # noqa: E402
 from zhtutor import repo  # noqa: E402
 
 MODEL = "deepseek-v4-pro"
@@ -122,16 +123,17 @@ def add_word(word):
         py = " ".join(lazy_pinyin(zc.han_only(word) or word, style=Style.TONE))
     except Exception:
         py = ""
-    ko = "(뜻 미확인)"
-    if KEY:
+    # 캐시 → HSK 내장 사전 → (미스·키 있을 때만) DeepSeek
+    def _fetch():
+        if not KEY:
+            return None
         try:
-            resp = z.complete(
+            return z.complete(
                 KEY, f"중국어 '{word}' 의 한국어 뜻을 아주 짧게 한 줄로만 답해."
                 " 설명·부가 문장 없이 뜻만.", MODEL)
-            if resp:
-                ko = resp.splitlines()[0].strip()
         except RuntimeError:
-            pass
+            return None
+    ko = gloss.resolve_gloss(word, online_fetch=_fetch)
     v = z.load_vocab()
     is_new = zc.add_entry(v, word, py, ko)
     z.save_vocab(v)

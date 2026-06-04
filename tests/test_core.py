@@ -239,6 +239,18 @@ def test_merge_hsk_adds_new_entries():
     assert "added" in vocab[0]
 
 
+def test_merge_hsk_prefers_ko_over_en():
+    # 프리컴퓨트된 ko 가 있으면 en 임시값 대신 ko 사용
+    vocab = []
+    entries = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "en": "hello", "ko": "안녕"}]
+    assert core.merge_hsk(vocab, entries) == 1
+    assert vocab[0]["ko"] == "안녕"  # ko 우선
+    # ko 없으면 en 으로 폴백
+    vocab2 = []
+    core.merge_hsk(vocab2, [{"hanzi": "谢谢", "en": "thanks"}])
+    assert vocab2[0]["ko"] == "thanks"
+
+
 def test_merge_hsk_skips_existing():
     vocab = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "ko": "안녕"}]
     entries = [{"hanzi": "你好", "pinyin": "nǐ hǎo", "en": "hello"},

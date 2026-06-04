@@ -17,7 +17,7 @@ import sys
 import urllib.error
 import urllib.request
 
-from . import core, db, repo
+from . import core, db, gloss, repo
 
 HSK_FILES = {"hsk1": "hsk1.json", "hsk2": "hsk2.json"}
 
@@ -515,16 +515,17 @@ def main():
                 py = " ".join(lazy_pinyin(core.han_only(word) or word, style=Style.TONE))
             except Exception:
                 py = ""
-            ko = "(뜻 미확인)"
-            try:
-                resp = complete(
-                    key,
-                    f"중국어 '{word}' 의 한국어 뜻을 아주 짧게 한 줄로만 답해."
-                    " 설명·부가 문장 없이 뜻만.", model)
-                if resp:
-                    ko = resp.splitlines()[0].strip()
-            except RuntimeError as e:
-                print(f"  (뜻 조회 실패: {e} — 핀인만 저장)", file=sys.stderr)
+            # 캐시 → HSK 내장 사전 → (미스 시에만) DeepSeek. HSK·기존 단어는 0 호출.
+            def _fetch():
+                try:
+                    return complete(
+                        key,
+                        f"중국어 '{word}' 의 한국어 뜻을 아주 짧게 한 줄로만 답해."
+                        " 설명·부가 문장 없이 뜻만.", model)
+                except RuntimeError as e:
+                    print(f"  (뜻 조회 실패: {e} — 핀인만 저장)", file=sys.stderr)
+                    return None
+            ko = gloss.resolve_gloss(word, online_fetch=_fetch)
             vocab = load_vocab()
             is_new = core.add_entry(vocab, word, py, ko)
             save_vocab(vocab)
