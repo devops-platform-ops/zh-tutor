@@ -51,3 +51,13 @@ make web       # 웹 UI (http://127.0.0.1:7860)
 HSK 2.0 Level 1·2 어휘 (간체 한자 + 핀인 + 영어 정의). 출처:
 [drkameleon/complete-hsk-vocabulary](https://github.com/drkameleon/complete-hsk-vocabulary) (MIT License).
 원본을 zh-tutor 스키마(`hanzi/pinyin/en`)로 변환하여 포함.
+
+## 백업 (NAS) — `scripts/backup-nas.sh`
+
+코드는 gitlab.dop 원격에 있으나, mbp15→NAS 직접 이중화 + workspaces 밖 비-git 데이터
+(`~/.local/share/zh-tutor`: HSK gloss 캐시·Dolt 진도)를 NAS(SMB)로 미러.
+
+```bash
+bash scripts/backup-nas.sh   # → /Volumes/Working/mbp15-backup/zh-tutor/{repo,share}  (env NAS_DIR)
+```
+SMB-safe rsync(`-aL --safe-links --inplace --no-specials --delete`), `.venv` 제외. `--delete` 미러.
