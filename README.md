@@ -10,7 +10,8 @@
 - **발음 채점**: 음성 입력(로컬 Whisper STT) → 핀인 음절·성조 비교로 0~100점 + 피드백.
 - **단어장**: 대화/직접 추가로 어휘 누적(汉字·핀인·뜻).
 - **복습(SRS)**: Leitner 간격 반복(box 1~5) 으로 망각곡선 복습.
-- **인터페이스**: 터미널 CLI(`zh`) + Gradio 웹 UI(`zhw`).
+- **읽기(`zh-read`)**: 중국어 글(URL/파일/stdin) → 한국어 번역 + 3줄 요약 + 단어표(汉字·핀인·뜻). 선별 단어를 단어장(SRS)에 자동 적재. HSK 기초어·고빈도 조사는 제외.
+- **인터페이스**: 터미널 CLI(`zh`) + Gradio 웹 UI(`zhw`) + 읽기(`zh-read`).
 
 ## 기술 스택
 
@@ -33,6 +34,25 @@ make db-up     # Dolt sql-server 기동
 make cli       # 터미널 튜터
 make web       # 웹 UI (http://127.0.0.1:7860)
 ```
+
+### 읽기 모드 (`zh-read`)
+
+```bash
+zh-read 'https://example.com/중국어글'            # URL
+zh-read article.txt                               # 파일
+pbpaste | zh-read -                               # 표준입력(붙여넣기 — JS 렌더 사이트 대비)
+
+# 옵션
+zh-read URL --level 3        # HSK3 이하 기초어까지 제외 (기본 2)
+zh-read URL --top 30         # 단어표 최대 개수 (기본 40)
+zh-read URL --no-save        # 단어장 적재 끄기 (기본: 신규 단어 SRS 추가)
+zh-read URL --voice          # 제목·단어 보통화 발음(say)
+zh-read URL --flash          # 저비용 모델(deepseek-v4-flash)
+zh-read URL --save-md ~/reads/x.md   # 학습자료 .md 저장
+```
+
+> ⚠️ DeepSeek 은 클라우드(중국 서버) — **공개·비민감 글에만** 사용. 사적/기밀 텍스트 금지.
+> 적재된 단어는 `zh`/`zhw` 복습에 합류하며, **기존 단어 진도(box/due)는 보존**(신규만 추가)된다.
 
 ## 문서
 

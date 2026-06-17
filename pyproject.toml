@@ -13,6 +13,7 @@ dependencies = [
     "gradio",           # 웹 UI
     "pymysql",          # Dolt sql-server 연결
     "onnxruntime<1.24", # faster-whisper VAD 의존 — Intel mac x86_64 휠 보장(1.24+ 미제공)
+    "jieba>=0.42.1",
 ]
 
 [dependency-groups]
@@ -21,6 +22,7 @@ dev = ["pytest"]
 [project.scripts]
 zh = "zhtutor.cli:main"
 zhw = "zhtutor.web:main"
+zh-read = "zhtutor.read:main"
 
 [build-system]
 requires = ["hatchling"]

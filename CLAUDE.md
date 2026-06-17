@@ -18,6 +18,7 @@ Claude Code 가 이 리포지토리에서 작업할 때 따르는 지침. **새 
 중국어 학습 플랫폼. 개인용 CLI/웹 → 다중 사용자 SaaS. 자세한 설계는 `docs/` 참조.
 - 아키텍처: 계층화(클라이언트 → core → repo → Dolt), 멀티테넌트(`user_id` 일급), 인증은 Phase 3까지 스텁.
 - CI/CD: gitlab.dop/solutions/zh-tutor primary + GitHub 공개 미러, dop 파이프라인(Jenkins/JSL/Harbor/ArgoCD) 배포.
+- 진입점: `zh`(회화 CLI) · `zhw`(웹) · `zh-read`(읽기 — URL/파일/stdin 중국어 글 → 번역+요약+단어표, 선별어 단어장 SRS 적재. `read.py`, jieba 세그+HSK/스톱리스트 필터, 기존 단어 진도 보존). DeepSeek=공개·비민감 글만.
 
 ## 핵심 원칙
 
