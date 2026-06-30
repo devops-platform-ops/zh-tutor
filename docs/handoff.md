@@ -3,12 +3,21 @@
 > 새 세션 5분 컨텍스트 복원용. CLAUDE.md + roadmap.md + 이 파일 순으로 읽으면 현재 위치·다음 행보 잡힘.
 
 ## 한 줄 요약
-**Phase 0/1/2 + Pass A 모두 ✅**. CLI + Gradio 웹 양쪽 동작, 멀티테넌트 Dolt 기반, 학습 통계, 단어장 편집·HSK1·2 import·회화-학습 연동 + **단어 뜻 캐시로 DeepSeek 단발 호출 제거**까지 작동. pytest 42건 통과.
+**Phase 0/1/2 + Pass A + A1(음향 성조) 모두 ✅**. CLI + Gradio 웹 양쪽 동작, 멀티테넌트 Dolt 기반, 학습 통계, 단어장 편집·HSK1·2 import·회화-학습 연동 + **단어 뜻 캐시로 DeepSeek 단발 호출 제거** + **녹음 F0 곡선으로 실제 성조 판정**까지 작동. pytest 63건 통과.
 
 ## 마지막 commit + push
 - `da1f3c9 feat(gloss): 단어 뜻 영구 캐시 + HSK 한국어 프리컴퓨트로 DeepSeek 단발 호출 제거`
 - gitlab.dop/solutions/zh-tutor (primary, project id=6) · github.com/devops-platform-ops/zh-tutor (HTTPS push-mirror id=2, fine-grained PAT in 키체인 `GH_PAT_ZH_MIRROR`)
 - gitlab push 완료(`ae3c552..da1f3c9`), github 미러 자동 sync (5분 throttle 주의)
+
+## A1 — 음향 기반 성조 피드백 (2026-06-24)
+- **문제**: 기존 성조 비교는 whisper 전사 한자→pypinyin 역산 → 한자만 맞으면 성조 오류를 못 잡음.
+- **해결**: `tone.py`(신규) — 녹음 F0 곡선을 **parselmouth(Praat)** 로 추출해 음절별 실제 성조(1~4성) 추정·비교.
+  `core.score_pronunciation(target, heard, audio=None, sr=None)` 에 `tone_acoustic` 병합(하위호환).
+- **CLI**: `listen()`→(heard, audio), 복습·`/drill` 에 audio 전달, `fmt_tone_feedback` 출력(confidence!=high→보류).
+- **라이브러리**: parselmouth 확정(librosa 20개 의존 vs 단일 휠+Praat 정확도). 자작 numpy 안 폐기(옥타브 에러).
+- **tests**: `test_tone.py` 16건 → 전체 63건 통과.
+- **남은 일**: 실제 마이크로 1~4성·음절분할 임계값 튜닝(사용자 귀=오라클). 커밋은 사용자 지시 대기.
 
 ## Pass A — DeepSeek 단발 호출 제거 (2026-06-04, `da1f3c9`)
 - **목적**: `complete()` 단발 호출(`/add` 단어 뜻 등)을 유한집합 프리컴퓨트 + 영구캐시로 사실상 0회.

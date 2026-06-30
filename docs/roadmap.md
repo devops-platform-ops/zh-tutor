@@ -49,6 +49,21 @@
 - [x] tests: gloss 7건 + merge_hsk ko우선 1건 (42 passed). 커밋 `da1f3c9`
 - 후속 후보: 회화(stream_chat) 로컬LLM(msu Ollama+Qwen2.5)로 오프라인화 = Pass B
 
+## A1 — 음향 기반 성조 피드백 ✅ 완료 (2026-06-24)
+- **문제**: 기존 `score_pronunciation` 성조 비교는 whisper 전사 한자를 pypinyin 으로 역산한 값 →
+  한자만 맞으면 성조 오류를 못 잡았다(사실상 한자 인식 성조).
+- **해결**: `tone.py`(신규) — 녹음 오디오의 **F0(피치) 곡선을 parselmouth(Praat)로 추출**해
+  음절별 실제 성조(1~4성/경성)를 추정·비교. 한자가 맞아도 성조 오류를 잡아낸다.
+  - `extract_f0`(parselmouth, graceful) · `voiced_runs`/`segment_syllables`(목표 음절수 n 정렬) ·
+    `classify_tone`(반음 스케일 기울기·V자 골·높이로 분류) · `analyze_tones` · `compare_tones`.
+- **F0 라이브러리 선정**: parselmouth 확정. librosa(20개 의존·numba) vs parselmouth(단일 휠·Praat 정확도)
+  비교 후 품질·의존성 둘 다 우위인 parselmouth 채택(자작 numpy 안은 옥타브 에러 취약으로 폐기).
+- **통합**: `core.score_pronunciation(target, heard, audio=None, sr=None)` — audio 주면 `tone_acoustic`
+  병합(하위호환). CLI `listen()`→(heard, audio) 반환, 복습·`/drill` 채점부에 audio 전달 +
+  `fmt_tone_feedback` 출력(confidence!=high 면 '판정 보류'). `/talk` 는 텍스트만 사용.
+- **tests**: `test_tone.py` 16건(합성 F0 곡선 결정적 + 합성 사인파 F0 smoke). 전체 63건 통과.
+- **남은 튜닝**: 실제 마이크 1~4성·음절분할 정확도는 사용자 실사용으로 임계값 보정 필요(귀=오라클).
+
 ## 후보 / 미래
 - Anki 내보내기(발음 mp3)
 - Dolt 원격(DoltHub) 백업·동기화, 모바일 접근

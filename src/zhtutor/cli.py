@@ -280,6 +280,24 @@ def transcribe(audio, model, language):
     return "".join(seg.text for seg in segments).strip()
 
 
+def fmt_tone_feedback(res):
+    """score_pronunciation 결과의 음향 성조(tone_acoustic) → 표시 문자열(없으면 None).
+
+    음절 정렬이 안 됐거나(confidence!=high) 녹음이 불명확하면 점수 대신 '보류' 안내.
+    """
+    ta = res.get("tone_acoustic") if res else None
+    if not ta:
+        return None
+    if not ta.get("ok") or ta.get("tone_score") is None or ta.get("confidence") != "high":
+        return "  🎵 성조: 판정 보류 (단어 단위로 또박또박 다시 시도해 보세요)"
+    line = f"  🎵 성조 {ta['tone_score']}/100"
+    if ta["problems"]:
+        line += " — " + "; ".join(ta["problems"][:3])
+    else:
+        line += " — 성조 정확! 👏"
+    return line
+
+
 def _print_stats():
     vocab = load_vocab()
     reviews = repo.get_review_log(USER_ID)
@@ -417,17 +435,20 @@ def main():
             del messages[1:len(messages) - 20]
 
     def listen():
-        """녹음→전사. 실패/무음이면 None, 인식 결과(빈 문자열 가능) 반환."""
+        """녹음→전사. (heard, audio) 반환. 실패/무음이면 (None, None).
+
+        audio(원본 16kHz float)는 음향 성조 분석용으로 함께 넘긴다(텍스트만 쓰면 무시).
+        """
         try:
             audio = record_until_enter()
             if audio is None or len(audio) == 0:
                 print("(녹음된 소리가 없습니다)")
-                return None
+                return None, None
             asr = ensure_asr(args.asr_model)
-            return transcribe(audio, asr, asr_lang)
+            return transcribe(audio, asr, asr_lang), audio
         except RuntimeError as e:
             print(f"[음성 입력 오류] {e}", file=sys.stderr)
-            return None
+            return None, None
 
     started = False  # 첫 빈 Enter 가 시작 신호
 
@@ -605,9 +626,10 @@ def main():
                 if low == "s" or ans == "":
                     print("  → 모름")
                 elif low == "t":
-                    heard = listen()
+                    heard, audio = listen()
                     if heard:
-                        res = core.score_pronunciation(target, heard)
+                        res = core.score_pronunciation(target, heard,
+                                                       audio=audio, sr=SAMPLE_RATE)
                         if res is None:
                             correct = core.han_only(heard) == core.han_only(target)
                             print(f"  🎤 내 발음: {heard}")
@@ -618,6 +640,9 @@ def main():
                             if res["problems"]:
                                 line += " — " + "; ".join(res["problems"][:2])
                             print(line)
+                            tone_fb = fmt_tone_feedback(res)
+                            if tone_fb:
+                                print(tone_fb)
                 else:
                     correct = core.han_only(ans) == core.han_only(target)
                 mark = "✅ 정답" if correct else "❌"
@@ -634,7 +659,7 @@ def main():
                 print(f"\n📖 복습 끝 — {done}개 중 {correct_n}개 정답 (저장됨)")
             continue
         if cmd == "/talk":
-            heard = listen()
+            heard, _audio = listen()
             if heard is None:
                 continue
             if not heard:
@@ -664,9 +689,10 @@ def main():
                             print("  (음성 미설치)")
                         continue
                     if sub == "t":
-                        heard = listen()
+                        heard, audio = listen()
                         if heard:
-                            res = core.score_pronunciation(sentence, heard)
+                            res = core.score_pronunciation(sentence, heard,
+                                                           audio=audio, sr=SAMPLE_RATE)
                             if res is None:
                                 print(f"  🎤 내 발음: {heard}")
                             else:
@@ -678,6 +704,9 @@ def main():
                                 else:
                                     line += " — 완벽해요! 👏"
                                 print(line)
+                                tone_fb = fmt_tone_feedback(res)
+                                if tone_fb:
+                                    print(tone_fb)
                         continue
                     if sub == "q":
                         stopped = True

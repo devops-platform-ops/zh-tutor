@@ -14,6 +14,7 @@ dependencies = [
     "pymysql",          # Dolt sql-server 연결
     "onnxruntime<1.24", # faster-whisper VAD 의존 — Intel mac x86_64 휠 보장(1.24+ 미제공)
     "jieba>=0.42.1",
+    "praat-parselmouth>=0.4.7",
 ]
 
 [dependency-groups]

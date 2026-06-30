@@ -66,8 +66,12 @@ def _tone_num(syl):
     return syl[-1] if syl and syl[-1].isdigit() else "5"
 
 
-def score_pronunciation(target, heard):
-    """목표 vs 내 발음을 핀인 음절+성조로 비교해 점수/피드백 반환. 한자 없으면 None."""
+def score_pronunciation(target, heard, audio=None, sr=None):
+    """목표 vs 내 발음을 핀인 음절+성조로 비교해 점수/피드백 반환. 한자 없으면 None.
+
+    audio(1D float)+sr 을 주면 녹음의 음높이 곡선으로 **실제 성조**를 분석해
+    결과에 `tone_acoustic` 을 덧붙인다(없으면 기존 텍스트 기반 동작과 동일, 하위호환).
+    """
     t_han = han_only(target)
     if not t_han:
         return None
@@ -104,7 +108,24 @@ def score_pronunciation(target, heard):
             problems.append(f"군더더기: {' '.join(h_t3[j1:j2])}")
 
     overall = round(100 * (0.7 * sound_match / n + 0.3 * tone_match / n))
-    return {"score": overall, "t_disp": t_disp, "h_disp": h_disp, "problems": problems}
+    result = {"score": overall, "t_disp": t_disp, "h_disp": h_disp, "problems": problems}
+
+    # 음향 기반 성조 분석 (오디오 제공 시) — 실패해도 텍스트 채점엔 영향 없음
+    if audio is not None and sr:
+        try:
+            from . import tone as tonemod
+            tgt_tones = [int(_tone_num(s)) for s in t_t3]
+            res = tonemod.analyze_tones(audio, sr, len(t_han))
+            cmp = tonemod.compare_tones(tgt_tones, res["tones"], t_han)
+            result["tone_acoustic"] = {
+                "confidence": res["confidence"],
+                "est_tones": res["tones"],
+                **cmp,
+            }
+        except Exception:
+            pass
+
+    return result
 
 
 # ---- 단어장 ----
